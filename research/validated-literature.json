@@ -1,0 +1,805 @@
+[
+  {
+    "title": "Challenges and trends of financial technology (Fintech): a systematic literature review",
+    "authors": [
+      "['RR Suryono', 'I Budi', 'B Purwandari']"
+    ],
+    "year": 2020,
+    "venue": "Information",
+    "citations": 445,
+    "abstract": "art of financial technology research; (2) identify gaps in the financial technology research   study includes theoretical contributions regarding financial technology. Using the systematic",
+    "url": "https://www.mdpi.com/2078-2489/11/12/590",
+    "source": "Google Scholar",
+    "impact_factor": 5.2
+  },
+  {
+    "title": "Regulating artificial intelligence",
+    "authors": [
+      "['T Wischmeyer', 'T Rademacher']"
+    ],
+    "year": 2020,
+    "venue": "NA",
+    "citations": 164,
+    "abstract": "of AI’s growing impact on society, there is broad agreement that those who regulate, employ  or are affected by AI- objective in terms of AI transparency. 1 While one should not forget that",
+    "url": "https://link.springer.com/content/pdf/10.1007/978-3-030-32361-5.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Global Regulatory Frameworks and Their Stance on AI in Compliance",
+    "authors": [
+      "['M Cate']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "This paper aims to analyze the current landscape of global regulatory frameworks  governing AI, with a particular focus on their stance toward compliance. It examines how major",
+    "url": "https://www.researchgate.net/profile/Mia-Cate/publication/390916602_Global_Regulatory_Frameworks_and_Their_Stance_on_AI_in_Compliance/links/68023fd0df0e3f544f42b030/Global-Regulatory-Frameworks-and-Their-Stance-on-AI-in-Compliance.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "A governance framework model for cloud computing: role of AI, security, compliance, and management",
+    "authors": [
+      "['A Folorunso', 'A Adewa', 'O Babalola', 'CE Nwatu']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 7,
+    "abstract": "framework model that integrates the roles of artificial intelligence (AI), security, compliance,  and  AI plays a critical role in optimizing resource allocation and improving decision-making",
+    "url": "https://www.researchgate.net/profile/Olufunbi-Babalola-2/publication/386277622_A_governance_framework_model_for_cloud_computing_role_of_AI_security_compliance_and_management/links/678953331ec9f9589f46ad61/A-governance-framework-model-for-cloud-computing-role-of-AI-security-compliance-and-management.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Smart Enterprise with SAP and Machine Learning Use Cases Across Industries",
+    "authors": [
+      "['K Harrington']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": ", analytics, AI, and integration services. With embedded ML services, SAP BTP allows developers   or integrate pre-trained models into SAP applications. It supports various programming",
+    "url": "https://www.researchgate.net/profile/Kevin-Harrington-12/publication/392708940_Smart_Enterprise_with_SAP_and_Machine_Learning_Use_Cases_Across_Industries/links/684eeadc474abd185bd8eb3f/Smart-Enterprise-with-SAP-and-Machine-Learning-Use-Cases-Across-Industries.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "AI-Enhanced ERP How Artificial Intelligence is Transforming SAP Systems",
+    "authors": [
+      "['K Harrington']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "adopt AI-powered SAP solutions  AI services must be carefully integrated without disrupting  existing workflows, requiring collaboration between SAP specialists, data engineers, and AI",
+    "url": "https://www.researchgate.net/profile/Kevin-Harrington-12/publication/392696357_AI-Enhanced_ERP_How_Artificial_Intelligence_is_Transforming_SAP_Systems/links/684dc676474abd185bd8c41a/AI-Enhanced-ERP-How-Artificial-Intelligence-is-Transforming-SAP-Systems.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Empowering Automotive Software Development with LLM-RAG Integration-A study on leveraging the RAG-framework for AUTOSAR and automotive safety standards …",
+    "authors": [
+      "['K KIEU', 'O BERGSTRAND']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 1,
+    "abstract": "Recent studies in the medical domain showcase the potential of RAG implementations to  adhere to domain-specific instructions effectively [11], [34], [35]. Xiong et al. [11] conducted a",
+    "url": "https://gupea.ub.gu.se/handle/2077/83663",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Privacy-Focused LLM for local data processing: Implementing OLLAMA and RAG to securely query personal files in closed environments",
+    "authors": [
+      "['A Rodríguez Quiñones']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "A Retrieval-Augmented Generation (RAG) subsystem dynamically retrieves and processes  internal document data, enhancing the contextual relevance of AI responses without external",
+    "url": "https://openaccess.uoc.edu/handle/10609/151999",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Automation in Financial Reporting, Processes, and Risk Mitigation",
+    "authors": [
+      "['E Hajjar']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 1,
+    "abstract": "Quantitative data will be derived from performance metrics  broad spectrum of automation  within financial processes. It sets  Studies on Financial Reporting and Process Automation This",
+    "url": "https://www.theseus.fi/handle/10024/856759",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Measuring Process Automation Maturity in Banks: Developing a Tailored Model and Visualization",
+    "authors": [
+      "['C Vötter']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "From there, I studied on the sideline ‘banking and finance’ and did my master in Austria,  Mag. FH for ‘banking and finance’. And switched my role to the finance area and financial",
+    "url": "https://epub.technikum-wien.at/obvftwhsm/content/titleinfo/10097592/full.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Robotic process automation (RPA) in the Financial Sector",
+    "authors": [
+      "['M Smeets', 'R Erhard', 'T Kaußler']"
+    ],
+    "year": 2021,
+    "venue": "NA",
+    "citations": 34,
+    "abstract": "The process automation solutions considered according to our definition work based on  firmly defined rules. They do not possess any machine learning abilities or artificial intelligence",
+    "url": "https://link.springer.com/content/pdf/10.1007/978-3-658-32974-7.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "The Impact of Robotic Process Automation (RPA) on the Accuracy and Timeliness of Financial Reporting",
+    "authors": [
+      "['B Akande', 'B Elly', 'D Joy']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "of RPA on financial reporting performance metrics— particularly  how RPA affects financial  reporting processes across diverse  implications of automation in financial management.",
+    "url": "https://www.researchgate.net/profile/Billy-Elly/publication/390768879_The_Impact_of_Robotic_Process_Automation_RPA_on_the_Accuracy_and_Timeliness_of_Financial_Reporting/links/67fd6ba5d1054b0207d3d564/The-Impact-of-Robotic-Process-Automation-RPA-on-the-Accuracy-and-Timeliness-of-Financial-Reporting.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Robotic process automation (RPA) in the Financial Sector",
+    "authors": [
+      "['M Smeets', 'R Erhard', 'T Kaußler']"
+    ],
+    "year": 2021,
+    "venue": "NA",
+    "citations": 34,
+    "abstract": "of how the technology is structured, how RPA can be integrated into the IT architecture of a  financial services company, and how RPA communicates with other applications. Detailed IT-",
+    "url": "https://link.springer.com/content/pdf/10.1007/978-3-658-32974-7.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Optimising Financial Reporting: A Lean Management and RPA Approach for EU Life-Funded Projects",
+    "authors": [
+      "['C Silen']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "These seven types have since become a benchmark in Lean practices across various  industries, guiding organizations in their pursuit of operational excellence. The first step in",
+    "url": "https://osuva.uwasa.fi/handle/10024/18046",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Process Mining in Healthcare: A Study About Data Standardizing Framework, KPIs, and Domain Expertise Involvement in Emergency Care of Developed and Non …",
+    "authors": [
+      "['K Srinivas']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "key performance indicators (KPIs) prevents the identification of inefficiencies and benchmarking  of ED performance. Additionally, process mining  ), standardizing KPIs for performance",
+    "url": "http://essay.utwente.nl/104893/",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Designing an AI governance framework: From research-based premises to meta-requirements.",
+    "authors": [
+      "['M Mäntymäki', 'M Minkkinen', 'MP Zimmer', 'T Birkstedt']"
+    ],
+    "year": 2023,
+    "venue": "ECIS",
+    "citations": 14,
+    "abstract": "into practice-oriented frameworks has proven difficult AI governance frameworks to help  translate ethical AI principles into practice and align operations with the forthcoming European AI",
+    "url": "https://www.researchgate.net/profile/Matti-Minkkinen/publication/370155604_Designing_an_AI_governance_framework_From_research-based_premises_to_meta-requirements/links/64423cee6216de136291c4ab/Designing-an-AI-governance-framework-From-research-based-premises-to-meta-requirements.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 4.5
+  },
+  {
+    "title": "AI in the financial sector: The line between innovation, regulation and ethical responsibility",
+    "authors": [
+      "['NN Ridzuan', 'M Masri', 'M Anshari', 'NL Fitriyani']"
+    ],
+    "year": 2024,
+    "venue": "Information",
+    "citations": 48,
+    "abstract": "innovation, regulation, and ethical issues in relation to AI within the banking and finance  sectors.  The financial services sector, one of the first adopters of AI, anticipates significant",
+    "url": "https://www.mdpi.com/2078-2489/15/8/432",
+    "source": "Google Scholar",
+    "impact_factor": 5.2
+  },
+  {
+    "title": "AI Meets Financial Regulation: Advancing the Algorithmic Shift",
+    "authors": [
+      "['ML Passador', 'G Bravi']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "of AI into finance, this chapter provides policymakers, financial  between innovation,  regulation, and financial stability,  In parallel, AI has become central to other financial services,",
+    "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5224392",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Regulatory Compliance and Ethical Considerations: Compliance challenges and opportunities with the integration of Big Data and AI",
+    "authors": [
+      "['E Blessing']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 2,
+    "abstract": "navigate the integration of Big Data and AI, they must prioritize regulatory compliance and   This paper will delve deeper into specific compliance challenges, opportunities, and best",
+    "url": "https://hal.science/hal-04972082/",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Artificial Intelligence Integration in Regulatory Compliance: A Strategic Model for Cybersecurity Enhancement",
+    "authors": [
+      "['OM Oluoha', 'A Odeshina', 'O Reis', 'F Okpeke', 'V Attipoe']"
+    ],
+    "year": 2022,
+    "venue": "NA",
+    "citations": 5,
+    "abstract": "mounting challenges in maintaining regulatory compliance while safeguarding their systems   model for integrating Artificial Intelligence (AI) into regulatory compliance frameworks to",
+    "url": "https://www.researchgate.net/profile/Anfo-Pub-2/publication/391901838_Artificial_Intelligence_Integration_in_Regulatory_Compliance_A_Strategic_Model_for_Cybersecurity_Enhancement/links/682c7c4fbe1b507dce8c3986/Artificial-Intelligence-Integration-in-Regulatory-Compliance-A-Strategic-Model-for-Cybersecurity-Enhancement.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Guidelines for artificial intelligence-driven enterprise compliance management systems",
+    "authors": [
+      "['AM Wall']"
+    ],
+    "year": 2021,
+    "venue": "NA",
+    "citations": 6,
+    "abstract": "the enablers and barriers of AI adoption and then discusses  AI aimed at supporting the  management of compliance.  of AI, control and compliance of AI applications, compliance by",
+    "url": "https://napier-repository.worktribe.com/output/2850798",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Automating financial compliance with AI: A New Era in regulatory technology (RegTech)",
+    "authors": [
+      "['HP Kothandapani']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 29,
+    "abstract": "Further, future work needs to focus on studying the real-life implications of integrating AI  into different compliance models where the current work has presented an idealistic view of",
+    "url": "https://www.researchgate.net/profile/Hariharan-Pappil-Kothandapani-2/publication/388405013_Automating_financial_compliance_with_AI_A_New_Era_in_regulatory_technology_RegTech/links/6797aeb996e7fb48b9a299a6/Automating-financial-compliance-with-AI-A-New-Era-in-regulatory-technology-RegTech.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "AI Powered Decision Support Systems in Government Financial Management: Transforming Policy Implementation and Fiscal Responsibility",
+    "authors": [
+      "['V Pamisetty']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 37,
+    "abstract": "view to helping enterprises to make better financial decisions. Since the 1980s, with  financial  decision support system has sprung up. The combination of AI technology with the financial",
+    "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5206134",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "… collaboration: key players in successful implementation of ChatGPT and similar generative artificial intelligence in manufacturing, finance, retail, transportation, and …",
+    "authors": [
+      "['NL Rane']"
+    ],
+    "year": 2023,
+    "venue": "NA",
+    "citations": 58,
+    "abstract": "the AI implementation adheres to the legal frameworks and regulatory guidelines governing  the finance sector. They offer valuable insights into data privacy laws, financial regulations,",
+    "url": "https://osf.io/preprints/npm3d/",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Sustainable Supply Chain Finances implementation model and Artificial Intelligence for innovative omnichannel logistics",
+    "authors": [
+      "['K Pawlicka', 'M Bal']"
+    ],
+    "year": 2022,
+    "venue": "Management",
+    "citations": 28,
+    "abstract": "records) and artificial intelligence (78 for sustainable supply chain management, finance and  AI).  (just 8 records for supply chain finance + omnichannel and 0 records for supply chain",
+    "url": "https://bibliotekanauki.pl/articles/2105389.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 4.8
+  },
+  {
+    "title": "Democratizing Expert Financial Advice in Latin America Using Foundation Models and Multi-Agent AI Systems",
+    "authors": [
+      "['O Larré', 'JM Pena', 'F Suárez']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "financial accessibility through state-of-the-art AI systems powered by foundation models. We  introduce three AI agents  , a sophisticated multi-agent financial advisor that has handled",
+    "url": "https://www.researchgate.net/profile/Omar-Larre/publication/393412944_Democratizing_Expert_Financial_Advice_in_Latin_America_Using_Foundation_Models_and_Multi-Agent_AI_Systems/links/6868479792697d42903d2fcb/Democratizing-Expert-Financial-Advice-in-Latin-America-Using-Foundation-Models-and-Multi-Agent-AI-Systems.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "MULTI AGENT MODEL BASED RISK PREDICTION IN BANKING TRANSACTION USING DEEP LEARNING MODEL",
+    "authors": [
+      "['GWP Sivathapandi']"
+    ],
+    "year": 2023,
+    "venue": "NA",
+    "citations": 13,
+    "abstract": "By combining the strengths of multi-agent systems and deep learning, this study offers a  reliable and flexible solution to help banks manage and adapt to changing risks more effectively",
+    "url": "https://philpapers.org/rec/PRAMAM-4",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Enhancing gen AI with multimodal RAG systems",
+    "authors": [
+      "['MA Abdullah']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "This points to a gap: existing multimodal benchmarks might not fully capture the intricacies  of enterprise financial documents, highlighting the need for more focused evaluation datasets.",
+    "url": "https://oulurepo.oulu.fi/handle/10024/55943",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Navigating the AI Frontier: The Imperative of Retrieval Augmented Generation (RAG), Data Completeness, and Robust Data Modeling in Salesforce Financial …",
+    "authors": [
+      "['T Kamlakshya']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 6,
+    "abstract": "Financial Cloud, a leading CRM platform tailored for the financial services industry, provides  a fertile ground for RAG  , financial transactions, and compliance regulations, Salesforce",
+    "url": "https://www.researchgate.net/profile/Tikhnadhi-Kamlakshya-2/publication/387124882_Navigating_the_AI_Frontier_The_Imperative_of_Retrieval_Augmented_Generation_RAG_Data_Completeness_and_Robust_Data_Modeling_in_Salesforce_Financial_Cloud/links/676b3ebe00aa3770e0b89375/Navigating-the-AI-Frontier-The-Imperative-of-Retrieval-Augmented-Generation-RAG-Data-Completeness-and-Robust-Data-Modeling-in-Salesforce-Financial-Cloud.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Empowering Financial Insights in the Cloud: Leveraging Retrieval-Augmented Generation and Intelligent Data Modeling on Salesforce",
+    "authors": [
+      "['A Abbas', 'M Rasool']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "framework for implementing RAG in Salesforce, emphasizing its compatibility with existing  Financial Cloud tools and data structures. Furthermore, we demonstrate how RAG can be",
+    "url": "https://www.researchgate.net/profile/Muskan-Rasool/publication/392495969_Empowering_Financial_Insights_in_the_Cloud_Leveraging_Retrieval-_Augmented_Generation_and_Intelligent_Data_Modeling_on_Salesforce/links/684470216b5a287c3049d177/Empowering-Financial-Insights-in-the-Cloud-Leveraging-Retrieval-Augmented-Generation-and-Intelligent-Data-Modeling-on-Salesforce.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "From RAGs to riches?-Exploring the security implications of Retrieval Augmented Generation in the financial sector",
+    "authors": [
+      "['F Segui', 'J Swärd', 'J Brejcha']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "domains such as the financial sector. This thesis explores how Scandinavian financial  institutions perceive and address the security risks associated with RAG systems. Guided by the",
+    "url": "https://lup.lub.lu.se/student-papers/search/publication/9192150",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Financial Advisory LLM Model for Modernizing Financial Services and Innovative Solutions for Financial Literacy in India",
+    "authors": [
+      "['BC Challagundla']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 2,
+    "abstract": "Integrating these advanced technologies within this model equips financial advisors with  culturally  through the Financial Advisory LLM Model, running from different financial challenges",
+    "url": "https://www.researchsquare.com/article/rs-4354348/latest",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Artificial Intelligence and Financial Transformation: Unlocking the Power of Fintech, Predictive Analytics, and Public Governance in the Next Era of Economic …",
+    "authors": [
+      "['A Dodda']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "The global financial ecosystem is undergoing a profound transformation, one driven by the  accelerating convergence of artificial intelligence, fintech innovation, and data-powered",
+    "url": "https://books.google.com/books?hl=en&lr=&id=JzBlEQAAQBAJ&oi=fnd&pg=PA1&dq=autonomous+agents+fintech&ots=-Asw9jmOJ-&sig=kv4XhHVKQqGneYrQUlZwyJ0lVY8",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "The Role of Agentic AI in Enhancing Fraud Detection in Credit Card Transactions",
+    "authors": [
+      "['O Isreal']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": ", while recommending strategies for responsible AI deployment in the fintech sector.   Unlike static models that require manual retraining, agentic AI agents autonomously update",
+    "url": "https://www.researchgate.net/profile/Olatunji-Isreal/publication/393441200_The_Role_of_Agentic_AI_in_Enhancing_Fraud_Detection_in_Credit_Card_Transactions/links/6869a7d5b991270ef301c224/The-Role-of-Agentic-AI-in-Enhancing-Fraud-Detection-in-Credit-Card-Transactions.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "FinPathlight: Framework for an multiagent recommender system designed to increase consumer financial capability",
+    "authors": [
+      "['L Bunnell', 'KM Osei-Bryson', 'VY Yoon']"
+    ],
+    "year": 2020,
+    "venue": "Decision Support Systems",
+    "citations": 38,
+    "abstract": "in terms of the utility of FinTech alternatives for financial goal  a novel financial technology  (FinTech) application aimed at  the current landscape for FinTech applications, providing a",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0167923620300610",
+    "source": "Google Scholar",
+    "impact_factor": 4.5
+  },
+  {
+    "title": "EAGLE: A Multi-Agent Generative AI System for Personalized Banking Recommendation and Risk-Aware Financial Planning",
+    "authors": [
+      "['V Srivastava']"
+    ],
+    "year": 2025,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "This role is critical in applications like products recommendation and financial advisory,   Even though it took extra average conversation turns to extract the information, we noticed that it",
+    "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5268216",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Regulating Robo-advisors in an Age of Generative Artificial Intelligence",
+    "authors": [
+      "['D Schwarcz', 'T Baker']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 1,
+    "abstract": "AI’s ability to convincingly mimic human financial advisors also creates significant risks of  large-scale financial  “robo-advisors” that supply fully automated financial advice to consumers.",
+    "url": "https://repository.law.umich.edu/law_econ_current/285/",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Design science research methodology: theory development from artifacts",
+    "authors": [
+      "['JO De Sordi']"
+    ],
+    "year": 2021,
+    "venue": "NA",
+    "citations": 31,
+    "abstract": "addresses the science of artificial and design theory in the context of the scientific research   associated with the emerging methodology Design Science Research (DSR). Further, he",
+    "url": "https://books.google.com/books?hl=en&lr=&id=4wBBEAAAQBAJ&oi=fnd&pg=PR7&dq=design+science+research+AI+artifact&ots=IoGWcWjlEX&sig=zqXP3Fr1DgmytGekVyC-df_fLT8",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "A process model for design-oriented machine learning research in information systems",
+    "authors": [
+      "['H Zolbanin', 'B Aubert']"
+    ],
+    "year": 2025,
+    "venue": "The Journal of Strategic Information Systems",
+    "citations": 4,
+    "abstract": "the design science research (DSR) process model, action  to develop a comprehensive  Machine Learning Process Model ( the arsenal of IS research methodologies. This shift is crucial",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0963868724000507",
+    "source": "Google Scholar",
+    "impact_factor": 4.5
+  },
+  {
+    "title": "Development of a method for the engineering of digital innovation using design science research",
+    "authors": [
+      "['M Huseynli', 'U Bub', 'MC Ogbuachi']"
+    ],
+    "year": 2022,
+    "venue": "Information",
+    "citations": 13,
+    "abstract": "The use of the DSR methodology allows for achieving both  dialog optimization, based on  machine learning models trained on the  Hence, our motivation for proposing DSR as a Digital",
+    "url": "https://www.mdpi.com/2078-2489/13/12/573",
+    "source": "Google Scholar",
+    "impact_factor": 5.2
+  },
+  {
+    "title": "ProcessGAN: Supporting the creation of business process improvement ideas through generative machine learning",
+    "authors": [
+      "['C van Dun', 'L Moder', 'W Kratsch', 'M Röglinger']"
+    ],
+    "year": 2023,
+    "venue": "Decision Support Systems",
+    "citations": 75,
+    "abstract": "Given the increasing amount of process data in the form of event logs and the uptake of  generative machine learning for automating creative tasks in various domains, there is huge",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0167923622001518",
+    "source": "Google Scholar",
+    "impact_factor": 4.5
+  },
+  {
+    "title": "Orthodontic Predictions with Machine Learning",
+    "authors": [
+      "['KT Win', 'S Trakulmututa', 'M Fahmideh']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 0,
+    "abstract": "The research methodology deployed in this study focuses on the application of DSR and   Utilising established methodologies such as the Cross-Industry Standard Process for Data",
+    "url": "https://aisel.aisnet.org/digit2024/20/",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "The design of human-artificial intelligence systems in decision sciences: A look back and directions forward",
+    "authors": [
+      "['VC Storey', 'AR Hevner', 'VY Yoon']"
+    ],
+    "year": 2024,
+    "venue": "Decision Support Systems",
+    "citations": 21,
+    "abstract": "-edge AI  Systems that makes contributions to HAIS design science research (DSR). We  define synergistic interactions among DSR, AI technology design, and human interaction design,",
+    "url": "https://www.sciencedirect.com/science/article/pii/S0167923624000630",
+    "source": "Google Scholar",
+    "impact_factor": 4.5
+  },
+  {
+    "title": "Artificial intelligence as digital agency",
+    "authors": [
+      "['PJ Ågerfalk']"
+    ],
+    "year": 2020,
+    "venue": "European Journal of Information Systems",
+    "citations": 313,
+    "abstract": "In the following, I explore the concept of digital practice by addressing AI from an information  systems perspective. The exploration serves a dual purpose. First, it addresses a potential",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/0960085X.2020.1721947",
+    "source": "Google Scholar",
+    "impact_factor": 4.9
+  },
+  {
+    "title": "Expl (AI) ned: The impact of explainable artificial intelligence on users' information processing",
+    "authors": [
+      "['K Bauer', 'M von Zahn', 'O Hinz']"
+    ],
+    "year": 2023,
+    "venue": "Information systems research",
+    "citations": 190,
+    "abstract": "of available information: their use of available information while  -label relationships the AI  system inherently models: their  In this paper, we follow previous work in information systems",
+    "url": "https://pubsonline.informs.org/doi/abs/10.1287/isre.2023.1199",
+    "source": "Google Scholar",
+    "impact_factor": 5.2
+  },
+  {
+    "title": "AI-assisted and explainable hate speech detection for social media moderators–A design science approach",
+    "authors": [
+      "['E Bunde']"
+    ],
+    "year": 2021,
+    "venue": "NA",
+    "citations": 46,
+    "abstract": "Design science research framework  The objective is to obtain new design knowledge for  a class of IT artifacts [11] which also can be utilized by future DSR and information systems (IS)",
+    "url": "https://scholarspace.manoa.hawaii.edu/bitstream/10125/70766/1/0125.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Relationship Between Trust in the AI Creator and Trust in AI Systems: The Crucial Role of AI Alignment and Steerability",
+    "authors": [
+      "Kambiz Saffarizadeh",
+      "Mark Keil",
+      "Likoebe Maruping"
+    ],
+    "year": 2024,
+    "venue": "Journal of Management Information Systems",
+    "doi": "10.1080/07421222.2024.2376382",
+    "citations": 8,
+    "abstract": "",
+    "url": "https://doi.org/10.1080/07421222.2024.2376382",
+    "source": "CrossRef",
+    "impact_factor": 4.8
+  },
+  {
+    "title": "Threatened by AI: Analyzing Users’ Responses to the Introduction of AI in a Crowd-Sourcing Platform",
+    "authors": [
+      "Mikhail Lysyakov",
+      "Siva Viswanathan"
+    ],
+    "year": 2023,
+    "venue": "Information Systems Research",
+    "doi": "10.1287/isre.2022.1184",
+    "citations": 45,
+    "abstract": "<jats:p> As artificial intelligence (AI) solutions are being rapidly deployed, they increasingly compete with human labor. This study examines designers’ strategies in response to the threat from the introduction of an AI system for simple logo designs in a crowdsourcing design platform. We find that, although designers with lower abilities are more likely to exit the platform, designers with higher abilities move away from the locus of threat in the lower-tier contests and switch to more-complex design contests after the introduction of the AI system. More interestingly, we find that, although unsuccessful designers respond to the threat from AI by increasing their participation across multiple contests, successful designers become more focused (i.e., they substantially increase the number of submissions within a contest) and more quality oriented (i.e., they increase emotional content and complexity of their designs) after the AI launch. Our findings show how designers can learn from the behaviors of the more successful designers to differentiate themselves from AI systems by leveraging the more-abstract design attributes. Platform operators would benefit from adopting better segmentations strategies: with AI solutions for simple design tasks, hybrid AI + human solutions for less-complex design tasks, and skilled human designers competing primarily for the more-complex design tasks. </jats:p>",
+    "url": "https://doi.org/10.1287/isre.2022.1184",
+    "source": "CrossRef",
+    "impact_factor": 5.2
+  },
+  {
+    "title": "HUMAN-AI COLLABORATION IN CONCEPTUALIZING DESIGN SCIENCE RESEARCH STUDIES: PERCEIVED HELPFULNESS OF GENERATIVE LANGUAGE …",
+    "authors": [
+      "['L Memmert', 'I Cvetkovic', 'E Bittner']"
+    ],
+    "year": 2023,
+    "venue": "NA",
+    "citations": 5,
+    "abstract": "on human-AI collaboration. In our study we focus on a particular means to solving complex  problems: design science research (DSR). We investigate whether AI, more specifically,",
+    "url": "https://aisel.aisnet.org/ecis2023_rp/405/",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "The duality of science: Knowledge in information systems research",
+    "authors": [
+      "Alan R Hevner"
+    ],
+    "year": 2021,
+    "venue": "Journal of Information Technology",
+    "doi": "10.1177/0268396220945714",
+    "citations": 6,
+    "abstract": "<jats:p> Rigorous research in Information Systems requires an understanding of how scientific foundations drive both the process and outcome. This science duality addresses the effective application of the scientific method (process) as well as the advance of knowledge (outcome) from the research project. This commentary responds to Siponen and Klaavuniemi’s paper with a focus on the uses of knowledge in Information Systems research. </jats:p>",
+    "url": "https://doi.org/10.1177/0268396220945714",
+    "source": "CrossRef",
+    "impact_factor": 5.8
+  },
+  {
+    "title": "Patient health locus of control: the design of information systems for patient-provider interactions",
+    "authors": [
+      "James Wallace",
+      "Matthew T Mullarkey",
+      "Alan Hevner"
+    ],
+    "year": 2023,
+    "venue": "European Journal of Information Systems",
+    "doi": "10.1080/0960085x.2022.2088416",
+    "citations": 5,
+    "abstract": "",
+    "url": "https://doi.org/10.1080/0960085x.2022.2088416",
+    "source": "CrossRef",
+    "impact_factor": 4.9
+  },
+  {
+    "title": "A deep learning approach for recognizing activity of daily living (ADL) for senior care: Exploiting interaction dependency and temporal patterns",
+    "authors": [
+      "['H Zhu', 'S Samtani', 'R Brown', 'H Chen']"
+    ],
+    "year": 2021,
+    "venue": "MIS quarterly",
+    "citations": 81,
+    "abstract": "This study adopts the design science paradigm and employs advanced deep learning   We propose a novel 2D interaction kernel for convolutional neural networks to leverage",
+    "url": "https://par.nsf.gov/biblio/10258087",
+    "source": "Google Scholar",
+    "impact_factor": 7.3
+  },
+  {
+    "title": "Ai in finance: challenges, techniques, and opportunities",
+    "authors": [
+      "['L Cao']"
+    ],
+    "year": 2022,
+    "venue": "ACM Computing Surveys (CSUR)",
+    "citations": 516,
+    "abstract": "(7) Agent-based modeling and simulation models, simulates and optimizes the working  mechanisms, dynamic formation processes, internal interactions between entities (ie, agents),",
+    "url": "https://dl.acm.org/doi/abs/10.1145/3502289",
+    "source": "Google Scholar",
+    "impact_factor": 10.2
+  },
+  {
+    "title": "Navigating the AI Frontier: The Imperative of Retrieval Augmented Generation (RAG), Data Completeness, and Robust Data Modeling in Salesforce Financial Cloud",
+    "authors": [
+      "['T Kamlakshya']"
+    ],
+    "year": 2024,
+    "venue": "NA",
+    "citations": 6,
+    "abstract": "Financial Cloud, a leading CRM platform tailored for the financial services industry, provides  a fertile ground for RAG  , financial transactions, and compliance regulations, Salesforce",
+    "url": "https://www.researchgate.net/profile/Tikhnadhi-Kamlakshya-2/publication/387124882_Navigating_the_AI_Frontier_The_Imperative_of_Retrieval_Augmented_Generation_RAG_Data_Completeness_and_Robust_Data_Modeling_in_Salesforce_Financial_Cloud/links/676b3ebe00aa3770e0b89375/Navigating-the-AI-Frontier-The-Imperative-of-Retrieval-Augmented-Generation-RAG-Data-Completeness-and-Robust-Data-Modeling-in-Salesforce-Financial-Cloud.pdf",
+    "source": "Google Scholar",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "A Theory of Information Compression: When Judgments Are Costly",
+    "authors": [
+      "Richard Thomas Watson",
+      "Kirk Plangger",
+      "Leyland Pitt",
+      "Amrit Tiwana"
+    ],
+    "year": 2023,
+    "venue": "Information Systems Research",
+    "doi": "10.1287/isre.2022.1163",
+    "citations": 5,
+    "abstract": "<jats:p>A Theory of Information Compression: When Judgments Are Costly</jats:p><jats:p>How useful to tourists are thousands of reviews of different five-star hotels in a city on a travel website when the mean rating is 4.5, and all the five-star hotels score around the mean? How insightful are reviews of physicians on a physician review website to potential patients when the ratings cluster tightly around an average for all physicians? Are there costs to the physicians, the patients, and to society as a whole? When all the students at a university score “A” grades on most courses, are there consequences for the university, the students, and potential employers? This paper calls the “clustering around a mean” phenomenon “information compression” and the systems in which it occurs (e.g., universities, students, employers) “judgment networks.” When there is extensive information compression in a system, measures such as ratings or grades have little value for decision makers. When all five-star hotels in a city score an average of 4.5 does it really matter which one a traveler chooses? The paper introduces a way of measuring information compression. It also suggests ways for organizations to overcome the negative consequences of information compression for themselves and their various stakeholders.</jats:p>",
+    "url": "https://doi.org/10.1287/isre.2022.1163",
+    "source": "CrossRef",
+    "impact_factor": 5.2
+  },
+  {
+    "title": "Socially responsible design science in information systems for sustainable development: a critical research methodology",
+    "authors": [
+      "Mike Monson"
+    ],
+    "year": 2023,
+    "venue": "European Journal of Information Systems",
+    "doi": "10.1080/0960085x.2021.1946442",
+    "citations": 12,
+    "abstract": "",
+    "url": "https://doi.org/10.1080/0960085x.2021.1946442",
+    "source": "CrossRef",
+    "impact_factor": 4.9
+  },
+  {
+    "title": "Financial Stability and Economic Sustainability: The Case of Sub-Saharan African Countries",
+    "authors": [
+      "Mvono Essono Bertrand"
+    ],
+    "year": 2025,
+    "venue": "Journal of Finance and Economics",
+    "doi": "10.12691/jfe-13-1-3",
+    "citations": 0,
+    "abstract": "",
+    "url": "https://doi.org/10.12691/jfe-13-1-3",
+    "source": "CrossRef",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Financial Integration of African and Asian Capital Markets During Pre- and Post-Global Financial Crisis",
+    "authors": [
+      "Amalendu Bhunia"
+    ],
+    "year": 2025,
+    "venue": "Journal of Finance and Economics",
+    "doi": "10.12691/jfe-13-1-5",
+    "citations": 0,
+    "abstract": "",
+    "url": "https://doi.org/10.12691/jfe-13-1-5",
+    "source": "CrossRef",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Examining How Changes in NPV Affect Fluctuations in Fair Stock Value",
+    "authors": [
+      "Mohamad Saad",
+      "Saeed Bajalan",
+      "Reza Tehrani"
+    ],
+    "year": 2025,
+    "venue": "Journal of Finance and Economics",
+    "doi": "10.12691/jfe-13-2-3",
+    "citations": 0,
+    "abstract": "",
+    "url": "https://doi.org/10.12691/jfe-13-2-3",
+    "source": "CrossRef",
+    "impact_factor": 7.2
+  },
+  {
+    "title": "Responsible AI starts with the artifact: Challenging the concept of responsible AI in IS research",
+    "authors": [
+      "Patrick Mikalef",
+      "Alexander Benlian",
+      "Kieran Conboy",
+      "Monideepa Tarafdar"
+    ],
+    "year": 2025,
+    "venue": "European Journal of Information Systems",
+    "doi": "10.1080/0960085x.2025.2506875",
+    "citations": 0,
+    "abstract": "",
+    "url": "https://doi.org/10.1080/0960085x.2025.2506875",
+    "source": "CrossRef",
+    "impact_factor": 4.9
+  }
+]

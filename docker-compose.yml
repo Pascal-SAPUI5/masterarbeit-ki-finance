@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mcp-server:
+    build: .
+    container_name: masterarbeit-mcp-server
+    ports:
+      - "3000:3000"
+    volumes:
+      # Persistente Daten
+      - ./.claude_memory:/app/.claude_memory
+      - ./research:/app/research
+      - ./output:/app/output
+      - ./writing:/app/writing
+      - ./config:/app/config
+      
+      # Entwicklungsmodus - Live Code Updates
+      - ./scripts:/app/scripts
+      - ./mcp_server.py:/app/mcp_server.py
+      - ./mcp_server_claude.py:/app/mcp_server_claude.py
+      - ./memory_system.py:/app/memory_system.py
+      
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MCP_MODE=claude
+      - RESEARCH_ENV=production
+    
+    # Für Windows/WSL2 Zugriff
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    
+    restart: unless-stopped
+    
+    # Gesundheitsprüfung
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:3000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

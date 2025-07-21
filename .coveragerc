@@ -1,0 +1,71 @@
+[run]
+branch = True
+source = .
+omit = 
+    */tests/*
+    */test_*
+    */__pycache__/*
+    */venv/*
+    */site-packages/*
+    setup.py
+    *_test.py
+    conftest.py
+    */migrations/*
+    */config/*
+
+[report]
+precision = 2
+show_missing = True
+skip_covered = False
+skip_empty = True
+
+exclude_lines =
+    # Standard excludes
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    
+    # Debugging
+    def __str__
+    
+    # Type checking
+    if TYPE_CHECKING:
+    @overload
+    
+    # Abstract methods
+    @abstract
+    @abstractmethod
+    
+    # Defensive programming
+    except ImportError
+    except KeyError
+    except AttributeError
+    
+    # Error handling
+    except Exception as e:
+    logger.error
+    logger.exception
+    
+    # Platform specific
+    if sys.platform
+    
+    # Optional features
+    try:
+        import
+
+[html]
+directory = htmlcov
+
+[xml]
+output = coverage.xml
+
+[paths]
+source =
+    .
+    */site-packages/
+
+[coverage:run]
+parallel = True
+concurrency = thread,multiprocessing

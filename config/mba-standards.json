@@ -1,0 +1,351 @@
+{
+  "thesis_requirements": {
+    "university": "Your MBA Institution",
+    "program": "MBA",
+    "thesis_type": "Master Thesis",
+    "language": "German",
+    "pages": {
+      "minimum": 60,
+      "maximum": 80,
+      "excluding": ["title_page", "table_of_contents", "bibliography", "appendices"]
+    },
+    "word_count": {
+      "minimum": 15000,
+      "maximum": 20000
+    },
+    "submission_format": {
+      "digital": ["PDF", "DOCX"],
+      "printed": {
+        "copies": 3,
+        "binding": "Hardcover"
+      }
+    }
+  },
+  "evaluation_criteria": {
+    "aufbau_und_form": {
+      "weight": 0.20,
+      "total_points": 20,
+      "aspects": {
+        "schluessigkeit_aufbau": {
+          "weight": 0.05,
+          "points": 5,
+          "description": "Schlüssigkeit des Aufbaus (inhaltsverzeichnung, rahmen des Gesamtvorgehens, Gliederung der Problemstellung, Struktur, Überleitung zur Arbeit in SDGs)"
+        },
+        "formale_praesentation": {
+          "weight": 0.07,
+          "points": 7,
+          "description": "Formale Präsentation (Grammatik, Ausdruck, Zeichensetzung, Formvorschriften, Qualität der Formatierung usw., korrekte und wissenschaftlicher Schreibstil, Verständlichkeit und Ausdruck, Diskriminierung ungenaue Sprache, korrekte Verwendung von Fachbegriffen, Fehler und Schreibungen)"
+        },
+        "nachvollziehbarkeit_quellen": {
+          "weight": 0.08,
+          "points": 8,
+          "description": "Nachvollziehbarkeit der Quellen formal korrekte Zitierweise (sämtliche Zitierrichtlinien, deutliche und vollständige Übernahme einer Übereinsstimmung von Literaturverzeichnis und verwendete Quellen im Text, deutliche Vermeidung von Plagiaten, Fehler von Schreibungsargumenten)"
+        }
+      }
+    },
+    "forschungsfrage_und_literatur": {
+      "weight": 0.30,
+      "total_points": 30,
+      "aspects": {
+        "breite_literatur": {
+          "weight": 0.10,
+          "points": 10,
+          "description": "Breite und Angemessenheit der verwendeten Literatur (Relevanz, Aktualität, Qualität, Repräsentativität der Literatur, Forschungsstand, Darstellung der zentralen Begriffe, Konzepte und Modelle, Darstellung des aktuellen Stands der Forschung auf Forschungsbereich, Verwendung von spezifischer Primärliteratur)"
+        },
+        "meta_problemstellung": {
+          "weight": 0.20,
+          "points": 20,
+          "description": "Meta-Problemstellung und wissenschaftlicher Fokus (Präzision der Formulierung und Themen- und wissenschaftlicher Fragestellung, Qualität der Problemabgrenzung/Problemstellung)"
+        }
+      }
+    },
+    "qualitaet_methodische_durchfuehrung": {
+      "weight": 0.40,
+      "total_points": 40,
+      "aspects": {
+        "durchfuehrung_methodik": {
+          "weight": 0.20,
+          "points": 20,
+          "description": "Durchführung und Methodik (Methodenwahl, Begründung, Durchführung, Eignang, Umfang und verwendetes systematische Darstellung der Vorgehensweise)"
+        },
+        "qualitaet_empirische_ergebnisse": {
+          "weight": 0.20,
+          "points": 20,
+          "description": "Qualität der empirischen Ergebnispräsentation (Abfolge von Darstellung/argument mit anschließender Interpretation dieser Daten in Referenz zur ausgewerteten Literatur in objektiven wissenschaftlichen Erörterungen mit Bezugstext Bearbeitung von Handlungsempfehlungen, pragmatische Zusammenfassung)"
+        }
+      }
+    },
+    "innovationsgrad_relevanz": {
+      "weight": 0.10,
+      "total_points": 10,
+      "aspects": {
+        "innovationsgrad_nutzen": {
+          "weight": 0.05,
+          "points": 5,
+          "description": "Innovationsgrad, Relevanz für Forschung und Praxis, Nutzen und Anschlussfähigkeit der Ergebnisse (Einschätzung des Beitrags zur Disziplin oder zum Thema)"
+        },
+        "selbstaendigkeit_originalitaet": {
+          "weight": 0.05,
+          "points": 5,
+          "description": "Grad der Selbständigkeit und Originalität (Gedankliche Tiefe, kritische Reflexion), Eigenständige Stellungnahme der Thematik über den inhaltlich bzw. sprachlich (Literatursuche, Grad der Unterstützung bei der Herangehensweise, Ableitung von Zusammenfassungen (Verfügung von Verbesserungsvorschläge), Kooperationen mit der Betreuung, kritische Gesamtdiskussion)"
+        }
+      }
+    }
+  },
+  "grading_scale": {
+    "sehr_gut": {
+      "percentage": "90-100%",
+      "points": "90-100",
+      "grade": "1.0-1.3",
+      "description": "Hervorragende Leistung, die den Anforderungen in besonderem Maße entspricht"
+    },
+    "gut": {
+      "percentage": "80-89%",
+      "points": "80-89",
+      "grade": "1.7-2.3",
+      "description": "Gute Leistung, die den Anforderungen voll entspricht"
+    },
+    "befriedigend": {
+      "percentage": "70-79%",
+      "points": "70-79",
+      "grade": "2.7-3.3",
+      "description": "Befriedigende Leistung, die den Anforderungen im Allgemeinen entspricht"
+    },
+    "ausreichend": {
+      "percentage": "60-69%",
+      "points": "60-69",
+      "grade": "3.7-4.0",
+      "description": "Ausreichende Leistung, die trotz ihrer Mängel noch den Anforderungen genügt"
+    },
+    "nicht_ausreichend": {
+      "percentage": "0-59%",
+      "points": "0-59",
+      "grade": "5.0",
+      "description": "Nicht ausreichende Leistung, die den Anforderungen nicht genügt"
+    }
+  },
+  "literature_quality_standards": {
+    "sehr_gut_5_punkte": {
+      "aktualitaet": ">90% Publikationen von 2020+",
+      "q1_journals": ">80% Q1-Journals",
+      "internationalitaet": "Ausgewogene internationale Verteilung (30-40% pro Region)",
+      "doi_verfügbarkeit": "100% DOI-Abdeckung wissenschaftlicher Quellen",
+      "methodik": "Systematische, transparente und nachvollziehbare Suchstrategie"
+    },
+    "gut_4_punkte": {
+      "aktualitaet": ">70% Publikationen von 2020+",
+      "q1_journals": ">60% Q1-Journals",
+      "internationalitaet": "Gute internationale Verteilung",
+      "doi_verfügbarkeit": ">90% DOI-Verfügbarkeit",
+      "methodik": "Strukturierte und begründete Suchstrategie"
+    },
+    "befriedigend_3_punkte": {
+      "aktualitaet": ">50% Publikationen von 2020+",
+      "q1_journals": ">40% Q1-Journals",
+      "internationalitaet": "Regionale Schwerpunkte erkennbar",
+      "doi_verfügbarkeit": ">80% DOI-Verfügbarkeit",
+      "methodik": "Grundlegende systematische Vorgehensweise"
+    },
+    "ausreichend_2_punkte": {
+      "aktualitaet": ">30% Publikationen von 2020+",
+      "q1_journals": ">20% Q1-Journals",
+      "internationalitaet": "Begrenzte internationale Abdeckung",
+      "doi_verfügbarkeit": ">60% DOI-Verfügbarkeit",
+      "methodik": "Teilweise systematische Suche"
+    },
+    "nicht_ausreichend_1_punkt": {
+      "aktualitaet": "<30% Publikationen von 2020+",
+      "q1_journals": "<20% Q1-Journals",
+      "internationalitaet": "Starke regionale Beschränkung",
+      "doi_verfügbarkeit": "<60% DOI-Verfügbarkeit",
+      "methodik": "Unsystematische oder nicht nachvollziehbare Suche"
+    }
+  },
+  "deadlines": {
+    "proposal_submission": "2025-09-15",
+    "first_draft": "2025-10-15",
+    "final_submission": "2025-11-30",
+    "defense": "2025-12-15"
+  },
+  "supervisor": {
+    "name": "",
+    "email": "",
+    "consultation_hours": ""
+  },
+  "theoretical_foundations": {
+    "core_theories": {
+      "primary_framework": {
+        "name": "Technology-Organization-Environment (TOE) Framework",
+        "origin": "Tornatzky & Fleischer (1990)",
+        "relevance_score": "10/10",
+        "application": "Erklärt SAP BTP-Adoption durch technologische, organisationale und umweltbezogene Faktoren",
+        "key_constructs": [
+          "Technological Context (SAP BTP Capabilities, RAG Integration, LLM Performance)",
+          "Organizational Context (Top Management Support, IT Resources, Change Management)",
+          "Environmental Context (Regulatory Pressure, Competitive Dynamics, EU AI Act)"
+        ]
+      },
+      "supporting_theories": [
+        {
+          "name": "Resource-Based View (RBV) Theory",
+          "origin": "Barney (1991)",
+          "relevance_score": "9/10",
+          "framework": "VRIO (Valuable, Rare, Inimitable, Organized)",
+          "application": "SAP BTP als strategische Ressource für nachhaltigen Wettbewerbsvorteil",
+          "citations": "50,000+"
+        },
+        {
+          "name": "Dynamic Capabilities Theory",
+          "origin": "Teece, Pisano & Shuen (1997)",
+          "relevance_score": "9/10",
+          "focus": "Anpassungsfähigkeit in volatilen Umgebungen",
+          "application": "Wie Agentic Workflows organisationale Anpassungsfähigkeit erhöhen"
+        },
+        {
+          "name": "Digital Business Strategy Framework",
+          "origin": "Bharadwaj et al. (2013)",
+          "relevance_score": "8/10",
+          "application": "Integration von IT- und Geschäftsstrategie für digitale Transformation"
+        }
+      ]
+    },
+    "literature_distribution": {
+      "classical_foundations_2013_2019": {
+        "percentage": "20%",
+        "focus": [
+          "TOE Framework Foundational Papers",
+          "RBV Grundlagenwerke",
+          "Digital Strategy Foundations"
+        ]
+      },
+      "established_theory_2020_2022": {
+        "percentage": "50%",
+        "focus": [
+          "Digital Transformation Frameworks",
+          "Enterprise AI Adoption Models",
+          "Dynamic Capabilities Extensions"
+        ]
+      },
+      "cutting_edge_2023_2025": {
+        "percentage": "30%",
+        "focus": [
+          "Agentic AI Theoretical Foundations",
+          "RAG Enterprise Implementation Frameworks",
+          "EU AI Act Compliance Theories"
+        ]
+      }
+    },
+    "mandatory_q1_literature": [
+      {
+        "citation": "Bharadwaj, A., El Sawy, O. A., Pavlou, P. A., & Venkatraman, N. (2013). Digital business strategy: Toward a next generation of insights. MIS Quarterly, 37(2), 471-482.",
+        "impact_factor": 7.92,
+        "citations": "2,000+",
+        "relevance": "Theoretical foundation for digital business strategy"
+      },
+      {
+        "citation": "Vial, G. (2019). Understanding digital transformation: A review and a research agenda. Journal of Strategic Information Systems, 28(2), 118-144.",
+        "impact_factor": 6.0,
+        "citations": "1,500+",
+        "relevance": "Comprehensive digital transformation framework"
+      },
+      {
+        "citation": "Barney, J. (1991). Firm resources and sustained competitive advantage. Journal of Management, 17(1), 99-120.",
+        "impact_factor": 9.0,
+        "citations": "50,000+",
+        "relevance": "Foundational RBV theory for competitive advantage"
+      },
+      {
+        "citation": "Tornatzky, L. G., & Fleischer, M. (1990). The processes of technological innovation. Lexington Books.",
+        "status": "Foundational work",
+        "citations": "10,000+",
+        "relevance": "Original TOE framework development"
+      },
+      {
+        "citation": "Teece, D. J., Pisano, G., & Shuen, A. (1997). Dynamic capabilities and strategic management. Strategic Management Journal, 18(7), 509-533.",
+        "impact_factor": 8.0,
+        "citations": "25,000+",
+        "relevance": "Dynamic capabilities theory foundation"
+      }
+    ],
+    "current_research_2024_2025": [
+      {
+        "citation": "Lin, Q. (2024). The theoretical framework of enterprise digital innovation: insights from a qualitative meta-analysis. European Journal of Innovation Management, 27(6).",
+        "impact_factor": 4.5,
+        "status": "NEW 2024",
+        "relevance": "Latest enterprise digital innovation framework"
+      },
+      {
+        "citation": "Paul, J., et al. (2024). Digital transformation: A multidisciplinary perspective and future research agenda. International Journal of Consumer Studies.",
+        "impact_factor": 4.2,
+        "status": "2024",
+        "relevance": "Multidisciplinary digital transformation insights"
+      }
+    ],
+    "theoretical_gaps_identified": [
+      {
+        "gap": "Agentic Workflows Theory",
+        "description": "Neue theoretische Entwicklung für autonome KI-Agenten in Unternehmen erforderlich",
+        "opportunity": "Framework-Entwicklung als Dissertation-Beitrag"
+      },
+      {
+        "gap": "RAG Enterprise Theory",
+        "description": "Fehlt in aktueller strategischer Management-Literatur",
+        "opportunity": "Integration von RAG in TOE Framework"
+      },
+      {
+        "gap": "AI Compliance Framework",
+        "description": "Schnittstelle Rechtswissenschaft + IT Management unterrepräsentiert",
+        "opportunity": "EU AI Act als Environmental Factor in TOE"
+      }
+    ],
+    "theoretical_synthesis_proposal": {
+      "integrated_framework": "TOE-RBV-DC Synthesis for Agentic Workflows",
+      "components": [
+        "TOE als Basis: Adoption von SAP BTP Agentic Workflows",
+        "RBV Integration: SAP BTP als strategische Ressource (VRIO)",
+        "Dynamic Capabilities: Anpassungsfähigkeit durch KI-Agenten",
+        "Compliance Extension: EU AI Act als Environmental Factor"
+      ],
+      "innovation_potential": "Neue Theoriesynthese für MBA-Bewertungskriterium 'Innovationsgrad' (5%)",
+      "practical_application": "SAP BTP Implementierungsleitfaden basierend auf theoretischem Framework"
+    },
+    "research_question_alignment": {
+      "hauptforschungsfrage": "TOE Framework erklärt 'Wie' der Implementierung",
+      "unterforschungsfrage_1_technisch": "RBV Theory für technische Architekturprinzipien",
+      "unterforschungsfrage_2_effizienz": "Dynamic Capabilities für Effizienzgewinne",
+      "unterforschungsfrage_3_compliance": "TOE Environmental Context für Governance-Anforderungen"
+    }
+  },
+  "quality_assessment_template": {
+    "literaturbreite_10_punkte": {
+      "aktualitaet": "__% von 2020+ | __% von 2022+",
+      "internationalitaet": "__% US | __% EU | __% Other",
+      "relevanz": "Durchschnitt __ von 10",
+      "mba_teilnote": "__/10 Punkte"
+    },
+    "literaturqualitaet_10_punkte": {
+      "q1_anteil": "__%",
+      "impact_factor_durchschnitt": "__",
+      "peer_review_status": "__% reviewed",
+      "methodische_vielfalt": "__% empirisch | __% konzeptionell",
+      "mba_teilnote": "__/10 Punkte"
+    },
+    "zitierfaehigkeit_8_punkte": {
+      "doi_verfügbarkeit": "__%",
+      "volltext_zugang": "__%",
+      "apa7_konformitaet": "alle ✓/✗",
+      "mba_teilnote": "__/8 Punkte"
+    },
+    "schwachstellen": {
+      "kritische_maengel": [],
+      "verbesserungsbedarfe": [],
+      "notenpunktimpact": "__"
+    },
+    "nachbesserung": {
+      "hohe_prioritaet": [],
+      "mittlere_prioritaet": [],
+      "notensteigerungspotenzial": "__",
+      "zeitaufwand_benefit_ratio": "__"
+    }
+  }
+}

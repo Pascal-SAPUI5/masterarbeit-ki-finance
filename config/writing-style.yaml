@@ -1,0 +1,67 @@
+# Academic Writing Style Guide for MBA Thesis
+# AI Agents in Finance
+
+style_guidelines:
+  language: "German"
+  academic_level: "Master (MBA)"
+  tone: "Professional, objective, analytical"
+  
+citation_style:
+  format: "APA 7th Edition"
+  in_text: "Author-Year"
+  bibliography: "Alphabetical by author"
+  
+structure:
+  abstract:
+    word_count: 150-250
+    languages: ["German", "English"]
+  
+  chapters:
+    1_introduction:
+      sections:
+        - "Problemstellung"
+        - "Zielsetzung"
+        - "Forschungsfragen"
+        - "Aufbau der Arbeit"
+    
+    2_theoretical_foundation:
+      sections:
+        - "KI-Agenten: Definition und Konzepte"
+        - "Retrieval-Augmented Generation (RAG)"
+        - "Anwendungen im Finanzsektor"
+        - "Regulatorische Rahmenbedingungen"
+    
+    3_methodology:
+      sections:
+        - "Forschungsdesign"
+        - "Literaturrecherche-Strategie"
+        - "Bewertungskriterien"
+        - "Analysemethoden"
+    
+    4_analysis:
+      sections:
+        - "Stand der Forschung"
+        - "Technologieanalyse"
+        - "Praxisbeispiele"
+        - "Kritische Bewertung"
+    
+    5_implementation:
+      sections:
+        - "Konzeptentwicklung"
+        - "Prototyp-Design"
+        - "Evaluierung"
+        - "Best Practices"
+    
+    6_conclusion:
+      sections:
+        - "Zusammenfassung"
+        - "Beantwortung der Forschungsfragen"
+        - "Implikationen für die Praxis"
+        - "Ausblick"
+
+formatting:
+  font: "Times New Roman"
+  size: 12
+  line_spacing: 1.5
+  margins: "2.5cm"
+  alignment: "Justified"

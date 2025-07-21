@@ -1,0 +1,63 @@
+# Research Quality Criteria for AI Agents in Finance
+# Master Thesis Configuration
+
+quality_criteria:
+  journal_rankings:
+    - Q1  # First quartile journals only
+    - A*  # Top-tier conferences
+  
+  impact_factor:
+    minimum: 3.0
+    preferred: 5.0
+  
+  publication_years:
+    start: 2020
+    end: 2025
+    focus: 2022-2025  # Most recent developments
+
+search_databases:
+  primary:
+    - scopus
+    - web_of_science
+    - acm_digital_library
+  secondary:
+    - ieee_xplore
+    - google_scholar
+    - arxiv
+
+keywords:
+  primary:
+    - "AI agents finance"
+    - "multi-agent systems banking"
+    - "RAG enterprise finance"
+    - "LLM financial services"
+  secondary:
+    - "autonomous agents fintech"
+    - "knowledge graphs banking"
+    - "retrieval augmented generation finance"
+    - "conversational AI financial advisory"
+
+exclusion_criteria:
+  - preprints_only
+  - non_peer_reviewed
+  - conference_posters
+  - workshop_papers
+
+validation_requirements:
+  minimum_citations: 5
+  peer_reviewed: true
+  full_text_available: true
+
+system:
+  llm_model: "phi3:mini"
+  use_gpu: false
+  chunk_size: 256
+  embedding_model: "all-MiniLM-L6-v2"
+  
+paths:
+  literature_base: "/literatur/"
+  index_path: "./indexes/"
+  
+citation:
+  style: "apa7"
+  include_page_numbers: true
