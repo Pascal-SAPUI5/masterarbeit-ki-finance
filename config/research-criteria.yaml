@@ -19,11 +19,13 @@ search_databases:
   primary:
     - scopus
     - web_of_science
+    - proquest  # NEU: Zugang über Hochschul-Login
     - acm_digital_library
   secondary:
     - ieee_xplore
     - google_scholar
     - arxiv
+    - crossref  # Für DOI-Verifizierung
 
 keywords:
   primary:

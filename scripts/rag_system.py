@@ -32,7 +32,7 @@ class PDFProcessor:
     def extract_text_with_ocr(self, pdf_path: str) -> List[Dict[str, Any]]:
         doc = fitz.open(pdf_path)
         pages = []
-        for page_num in track(range(len(doc)), description="Processing PDF..."):
+        for page_num in range(len(doc)):
             page = doc[page_num]
             text = page.get_text()
             if not text.strip():  # OCR if no text
@@ -98,6 +98,16 @@ class RAGIndexer:
         with open(self.index_path / "metadata.json", "w", encoding="utf-8") as f:
             json.dump(self.metadata, f, ensure_ascii=False)
 
+    def load_index(self):
+        index_file = self.index_path / "faiss_index"
+        metadata_file = self.index_path / "metadata.json"
+        if index_file.exists() and metadata_file.exists():
+            self.index = faiss.read_index(str(index_file))
+            with open(metadata_file, "r", encoding="utf-8") as f:
+                self.metadata = json.load(f)
+            return True
+        return False
+
 class SemanticSearcher:
     def __init__(self, indexer: RAGIndexer):
         self.indexer = indexer
@@ -135,22 +145,29 @@ class RAGSystem:
         with open(config_path, "r", encoding="utf-8") as f:
             self.config = yaml.safe_load(f)
         self.indexer = RAGIndexer(self.config["system"]["embedding_model"], cpu_only, self.config["paths"]["index_path"])
+        # Lade existierenden Index falls vorhanden
+        if not self.indexer.load_index():
+            logging.info("No existing index found, will create new one if needed")
         self.searcher = SemanticSearcher(self.indexer)
         self.citer = CitationGenerator()
         self.llm_model = self.config["system"]["llm_model"]
 
     def query(self, text: str, top_k: int = 5) -> Dict[str, Any]:
-        if psutil.virtual_memory().percent > 80:
-            logging.warning("Hohe RAM-Nutzung, fallback zu simpler Suche")
-            # Fallback: Nur Retrieval ohne LLM
-            results = self.searcher.search(text, top_k)
-            return self.format_response(results, text, use_llm=False)
-
         results = self.searcher.search(text, top_k)
-        context = "\n".join(res["chunk"] for res in results)
-        prompt = f"Beantworte basierend auf diesem Kontext: {context}\nFrage: {text}\nAntwort:"
-        response = ollama.generate(model=self.llm_model, prompt=prompt, options={"num_thread": 4})["response"]
-        return self.format_response(results, response)
+        
+        # Versuche LLM, falls zu viel RAM oder Ollama nicht verfügbar -> Fallback
+        try:
+            if psutil.virtual_memory().percent > 80:
+                logging.warning("Hohe RAM-Nutzung, fallback zu simpler Suche")
+                return self.format_response(results, text, use_llm=False)
+            
+            context = "\n".join(res["chunk"] for res in results)
+            prompt = f"Beantworte basierend auf diesem Kontext: {context}\nFrage: {text}\nAntwort:"
+            response = ollama.generate(model=self.llm_model, prompt=prompt, options={"num_thread": 4})["response"]
+            return self.format_response(results, response)
+        except Exception as e:
+            logging.warning(f"LLM nicht verfügbar ({e}), nutze nur Retrieval")
+            return self.format_response(results, text, use_llm=False)
 
     def format_response(self, results: List[Dict], answer: str, use_llm: bool = True) -> Dict[str, Any]:
         formatted = {
@@ -194,7 +211,7 @@ def main():
 
     args = parser.parse_args()
 
-    config_path = "config/research-criteria.yaml"
+    config_path = "config/rag_config.yaml"
     system = RAGSystem(config_path, args.cpu_only)
 
     if args.command == "index":

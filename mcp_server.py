@@ -49,7 +49,7 @@ class MasterarbeitMCPServer:
         self.rules = self.memory.rules
         
         # RAG Extension
-        self.rag_extension = MCPRAGExtension(self.project_root)
+        self.rag_extension = MCPRAGExtension()
     
     async def handle_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
         """Verarbeitet eingehende MCP-Anfragen."""

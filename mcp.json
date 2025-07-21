@@ -1,0 +1,215 @@
+{
+  "name": "masterarbeit-ki-finance",
+  "version": "1.0.0",
+  "description": "MCP Server für Masterarbeit KI-Agenten im Finanzwesen - Forschungsautomatisierung",
+  "author": "Masterarbeit KI Finance",
+  "license": "Academic Use",
+  "main": "mcp_server_claude.py",
+  "tools": {
+    "search_literature": {
+      "description": "Durchsucht akademische Datenbanken nach Q1-Journals (2020-2025)",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "Suchbegriff (z.B. 'PRISMA framework', 'AI agents finance')",
+          "required": true
+        },
+        "databases": {
+          "type": "array",
+          "description": "Datenbanken: IEEE Xplore, ACM Digital Library, ScienceDirect",
+          "default": ["IEEE Xplore", "ACM Digital Library", "ScienceDirect"]
+        },
+        "years": {
+          "type": "string",
+          "description": "Jahresbereich (z.B. '2020-2025')",
+          "default": "2020-2025"
+        },
+        "quality": {
+          "type": "string",
+          "description": "Qualitätsfilter: q1, q2, etc.",
+          "default": "q1"
+        }
+      },
+      "returns": "Liste von Papers mit Titel, Autoren, Jahr, Journal, DOI, Impact Factor"
+    },
+    "manage_references": {
+      "description": "Verwaltet Referenzen und Citavi-Integration",
+      "parameters": {
+        "action": {
+          "type": "string",
+          "enum": ["import", "export", "find"],
+          "description": "Aktion: import (aus Suchergebnissen), export (nach Citavi), find (Referenz suchen)",
+          "required": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Quelldatei für Import oder Suchbegriff für find"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["citavi", "bibtex", "ris"],
+          "description": "Export-Format",
+          "default": "citavi"
+        }
+      },
+      "returns": "Status der Operation oder gefundene Referenzen"
+    },
+    "create_writing_template": {
+      "description": "Erstellt akademische Schreibvorlagen nach MBA-Standards",
+      "parameters": {
+        "chapter": {
+          "type": "string",
+          "description": "Kapitelname (z.B. 'Methodik', 'Einleitung')",
+          "required": true
+        },
+        "section": {
+          "type": "string",
+          "description": "Abschnittsname (z.g. 'Problemstellung', 'Forschungsdesign')",
+          "required": true
+        }
+      },
+      "returns": "Pfad zur erstellten Template-Datei mit Struktur und Hinweisen"
+    },
+    "verify_citations": {
+      "description": "Prüft und formatiert Zitationen nach APA 7th Edition",
+      "parameters": {
+        "text": {
+          "type": "string",
+          "description": "Text, der zitiert werden soll",
+          "required": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Quellenangabe (z.B. 'Page et al. 2021')",
+          "required": true
+        }
+      },
+      "returns": "Formatierte Zitation mit Seitenzahl und vollständiger Referenz"
+    },
+    "search_documents": {
+      "description": "Durchsucht indexierte PDFs mit RAG-System (nutzt Ollama/phi3:mini für intelligente Antworten)",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "Suchanfrage (z.B. 'PRISMA checklist items')",
+          "required": true
+        },
+        "top_k": {
+          "type": "integer",
+          "description": "Anzahl der Top-Ergebnisse",
+          "default": 5
+        }
+      },
+      "returns": "KI-generierte Antwort mit Quellen, Kontext und korrekten Zitationen"
+    },
+    "index_documents": {
+      "description": "Indexiert PDFs für RAG-Suche",
+      "parameters": {
+        "path": {
+          "type": "string",
+          "description": "Pfad zum Verzeichnis mit PDFs",
+          "required": true
+        }
+      },
+      "returns": "Status der Indexierung"
+    },
+    "get_context": {
+      "description": "Zeigt aktuellen Projektkontext und Fortschritt",
+      "parameters": {},
+      "returns": "Projektphase, fertige Kapitel, Deadlines, aktive Regeln"
+    },
+    "add_note": {
+      "description": "Fügt wichtige Notiz zum Projektkontext hinzu",
+      "parameters": {
+        "note": {
+          "type": "string",
+          "description": "Notiz-Text",
+          "required": true
+        }
+      },
+      "returns": "Bestätigung der gespeicherten Notiz"
+    },
+    "update_progress": {
+      "description": "Aktualisiert Fortschritt eines Kapitels/Abschnitts",
+      "parameters": {
+        "chapter": {
+          "type": "string",
+          "description": "Kapitelname"
+        },
+        "section": {
+          "type": "string", 
+          "description": "Abschnittsname"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["started", "in_progress", "completed"],
+          "description": "Neuer Status"
+        }
+      },
+      "returns": "Aktualisierter Fortschritt in Prozent"
+    },
+    "check_progress": {
+      "description": "Zeigt detaillierten Fortschritt der Masterarbeit",
+      "parameters": {},
+      "returns": "Fortschritt pro Kapitel, Gesamtfortschritt, nächste Deadlines"
+    },
+    "extract_pdf_content": {
+      "description": "Extrahiert Text und Metadaten aus PDF-Dateien",
+      "parameters": {
+        "pdf_path": {
+          "type": "string",
+          "description": "Pfad zur PDF-Datei",
+          "required": true
+        }
+      },
+      "returns": "Extrahierter Text, Metadaten und Seitenzahl"
+    },
+    "get_rag_stats": {
+      "description": "Zeigt RAG-System Statistiken",
+      "parameters": {},
+      "returns": "Anzahl indexierter Dokumente, Index-Größe, LLM-Verfügbarkeit"
+    },
+    "memory_checkpoint": {
+      "description": "Erstellt oder lädt Projekt-Checkpoints",
+      "parameters": {
+        "action": {
+          "type": "string",
+          "enum": ["create", "restore", "list"],
+          "description": "Aktion",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Checkpoint-Name"
+        }
+      },
+      "returns": "Status der Checkpoint-Operation"
+    }
+  },
+  "configuration": {
+    "rag": {
+      "model": "phi3:mini",
+      "embedding_model": "all-MiniLM-L6-v2",
+      "chunk_size": 256,
+      "auto_fallback": true
+    },
+    "quality_criteria": {
+      "min_year": 2020,
+      "max_year": 2025,
+      "quartile": "Q1",
+      "min_impact_factor": 3.0
+    },
+    "language": {
+      "thesis": "de",
+      "technical_terms": "en"
+    }
+  },
+  "examples": {
+    "literature_search": "search_literature --query 'PRISMA framework systematic review' --quality q1",
+    "find_citation": "search_documents --query 'PRISMA 2020 checklist 27 items' --top_k 3",
+    "verify_citation": "verify_citations --text 'Die systematische Literaturanalyse folgt dem PRISMA-Framework' --source 'Page et al. 2021'",
+    "create_template": "create_writing_template --chapter 'Methodik' --section 'Systematische Literaturanalyse'",
+    "index_pdfs": "index_documents --path 'literatur/methodik/'",
+    "checkpoint": "memory_checkpoint --action create --name 'kapitel2_fertig'"
+  }
+}
