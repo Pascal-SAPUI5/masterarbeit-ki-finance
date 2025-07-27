@@ -60,8 +60,8 @@ structure:
         - "Ausblick"
 
 formatting:
-  font: "Times New Roman"
-  size: 12
+  font: "Arial"
+  size: 11
   line_spacing: 1.5
   margins: "2.5cm"
   alignment: "Justified"

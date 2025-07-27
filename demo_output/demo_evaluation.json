@@ -1,0 +1,235 @@
+{
+  "metadata": {
+    "thesis_title": "Implementierung von Agentic Workflows mit SAP BTP",
+    "author": "Demo Student",
+    "evaluation_date": "2025-07-27",
+    "generated_at": "2025-07-27T15:44:59.954981"
+  },
+  "executive_summary": {
+    "final_grade": "2.3",
+    "grade_category": "gut",
+    "total_points": 80.5,
+    "percentage": 80.5,
+    "key_strengths": [
+      "Sehr gute Leistung in Aufbau Und Form",
+      "Sehr gute Leistung in Forschungsfrage Und Literatur",
+      "Sehr gute Leistung in Qualitaet Methodische Durchfuehrung",
+      "Sehr gute Leistung in Innovationsgrad Relevanz"
+    ],
+    "main_weaknesses": []
+  },
+  "detailed_evaluation": {
+    "aufbau_und_form": {
+      "score": 16.5,
+      "max_points": 20,
+      "percentage": 82.5,
+      "details": {
+        "schluessigkeit_aufbau": {
+          "score": 4.0,
+          "max": 5,
+          "comments": "Gute Strukturierung, kleine Verbesserungen möglich"
+        },
+        "formale_praesentation": {
+          "score": 5.5,
+          "max": 7,
+          "comments": "Einige Formatierungsfehler und Tippfehler"
+        },
+        "nachvollziehbarkeit_quellen": {
+          "score": 7.0,
+          "max": 8,
+          "comments": "Sehr gute Zitierweise"
+        }
+      }
+    },
+    "forschungsfrage_und_literatur": {
+      "score": 24.5,
+      "max_points": 30,
+      "percentage": 81.66666666666667,
+      "details": {
+        "breite_literatur": {
+          "score": 8.0,
+          "max": 10,
+          "comments": "Gute Literaturauswahl, mehr aktuelle Quellen wünschenswert"
+        },
+        "meta_problemstellung": {
+          "score": 16.5,
+          "max": 20,
+          "comments": "Klar formulierte Forschungsfrage"
+        }
+      }
+    },
+    "qualitaet_methodische_durchfuehrung": {
+      "score": 31.5,
+      "max_points": 40,
+      "percentage": 78.75,
+      "details": {
+        "durchfuehrung_methodik": {
+          "score": 16.0,
+          "max": 20,
+          "comments": "Solide Methodik, Stichprobe könnte größer sein"
+        },
+        "qualitaet_empirische_ergebnisse": {
+          "score": 15.5,
+          "max": 20,
+          "comments": "Gute Ergebnisdarstellung"
+        }
+      }
+    },
+    "innovationsgrad_relevanz": {
+      "score": 8.0,
+      "max_points": 10,
+      "percentage": 80.0,
+      "details": {
+        "innovationsgrad_nutzen": {
+          "score": 4.0,
+          "max": 5,
+          "comments": "Hohe praktische Relevanz"
+        },
+        "selbstaendigkeit_originalitaet": {
+          "score": 4.0,
+          "max": 5,
+          "comments": "Eigenständige Herangehensweise"
+        }
+      }
+    }
+  },
+  "literature_quality_assessment": {
+    "score": {
+      "category": "befriedigend_3_punkte",
+      "points": 3,
+      "details": {
+        "aktualitaet": ">50% Publikationen von 2020+",
+        "q1_journals": ">40% Q1-Journals",
+        "internationalitaet": "Regionale Schwerpunkte erkennbar",
+        "doi_verfügbarkeit": ">80% DOI-Verfügbarkeit",
+        "methodik": "Grundlegende systematische Vorgehensweise"
+      },
+      "metrics": {
+        "aktualitaet": 72,
+        "q1_percentage": 62,
+        "doi_coverage": 89,
+        "international_balance": true
+      }
+    },
+    "statistics": {
+      "total_sources": 125,
+      "quality_metrics": {
+        "aktualitaet": {
+          "2020_plus": 72,
+          "2022_plus": 38,
+          "2024_2025": 8
+        },
+        "journal_quality": {
+          "q1_journals": 62,
+          "q2_journals": 25,
+          "other": 13
+        },
+        "geographic_distribution": {
+          "US": 42,
+          "EU": 38,
+          "Other": 20
+        },
+        "doi_coverage": 89,
+        "open_access": 35
+      },
+      "top_journals": [
+        {
+          "name": "MIS Quarterly",
+          "count": 6,
+          "impact_factor": 7.92
+        },
+        {
+          "name": "Information Systems Research",
+          "count": 4,
+          "impact_factor": 5.8
+        },
+        {
+          "name": "Journal of Strategic Information Systems",
+          "count": 4,
+          "impact_factor": 6.0
+        }
+      ],
+      "theoretical_frameworks": [
+        {
+          "name": "TOE Framework",
+          "usage_count": 12
+        },
+        {
+          "name": "RBV Theory",
+          "usage_count": 8
+        },
+        {
+          "name": "Dynamic Capabilities",
+          "usage_count": 6
+        }
+      ]
+    },
+    "top_journals": [
+      {
+        "name": "MIS Quarterly",
+        "count": 6,
+        "impact_factor": 7.92
+      },
+      {
+        "name": "Information Systems Research",
+        "count": 4,
+        "impact_factor": 5.8
+      },
+      {
+        "name": "Journal of Strategic Information Systems",
+        "count": 4,
+        "impact_factor": 6.0
+      }
+    ],
+    "theoretical_coverage": [
+      {
+        "name": "TOE Framework",
+        "usage_count": 12
+      },
+      {
+        "name": "RBV Theory",
+        "usage_count": 8
+      },
+      {
+        "name": "Dynamic Capabilities",
+        "usage_count": 6
+      }
+    ]
+  },
+  "final_grade": {
+    "total_points": 80,
+    "percentage": 80,
+    "grade_category": "gut",
+    "numeric_grade": "2.3",
+    "description": "Gute Leistung, die den Anforderungen voll entspricht"
+  },
+  "recommendations": {
+    "priority_improvements": [],
+    "strengths": [
+      "aufbau_und_form",
+      "forschungsfrage_und_literatur",
+      "qualitaet_methodische_durchfuehrung",
+      "innovationsgrad_relevanz"
+    ],
+    "category_percentages": {
+      "aufbau_und_form": 82.5,
+      "forschungsfrage_und_literatur": 81.66666666666667,
+      "qualitaet_methodische_durchfuehrung": 78.75,
+      "innovationsgrad_relevanz": 80.0
+    },
+    "potential_grade_improvement": 0.5,
+    "specific_recommendations": [],
+    "estimated_effort": {
+      "total_hours": 0,
+      "weeks_needed": 1.0,
+      "difficulty": "low",
+      "priority_order": []
+    }
+  },
+  "quality_indicators": {
+    "meets_mba_standards": true,
+    "literature_quality": "befriedigend_3_punkte",
+    "innovation_level": "Sehr innovativ",
+    "recommendation": "Sehr gute Arbeit - Annahme ohne Auflagen"
+  }
+}

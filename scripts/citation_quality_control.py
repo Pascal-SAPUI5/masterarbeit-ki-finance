@@ -2,6 +2,7 @@
 """
 Citation Quality Control Module
 Ensures citations meet academic standards
+Integrated with MBA Quality Checker for comprehensive assessment
 """
 import re
 from typing import Dict, List, Tuple, Optional
@@ -226,6 +227,14 @@ def main():
             print("\nIssues found:")
             for issue in result['issues']:
                 print(f"- {issue}")
+    
+    else:
+        print("Citation Quality Control Tool")
+        print("\nUsage:")
+        print("  --verify <text> --source <reference> : Verify a single citation")
+        print("  --check-file <path>                  : Check all citations in a file")
+        print("\nFor comprehensive MBA quality checking, use:")
+        print("  python scripts/mba_quality_checker.py --check-file <path> --full-report")
 
 if __name__ == "__main__":
     main()

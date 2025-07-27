@@ -20,6 +20,40 @@ from mcp_server import MasterarbeitMCPServer
 class ClaudeMCPServer(MasterarbeitMCPServer):
     """MCP Server angepasst für Claude Code."""
     
+    async def initialize(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle the initialize method according to MCP protocol."""
+        return {
+            "protocolVersion": "2025-06-18",
+            "capabilities": {
+                "tools": True,
+                "resources": True,
+                "prompts": True
+            },
+            "serverInfo": {
+                "name": "masterarbeit-ki-finance",
+                "version": "1.0.0"
+            }
+        }
+    
+    async def shutdown(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Handle the shutdown method gracefully."""
+        # Perform any cleanup if needed
+        return {}
+    
+    async def handle_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
+        """Override to handle initialize and shutdown methods."""
+        method = request.get("method", "")
+        params = request.get("params", {})
+        
+        # Handle initialize and shutdown before delegating to parent
+        if method == "initialize":
+            return await self.initialize(params)
+        elif method == "shutdown":
+            return await self.shutdown(params)
+        else:
+            # Delegate to parent class for all other methods
+            return await super().handle_request(request)
+    
     async def handle_json_rpc(self, data: str) -> str:
         """Handle JSON-RPC 2.0 protocol."""
         try:
@@ -89,7 +123,7 @@ async def main():
     init_response = {
         "jsonrpc": "2.0",
         "result": {
-            "protocolVersion": "0.1.0",
+            "protocolVersion": "2025-06-18",
             "capabilities": {
                 "tools": True,
                 "resources": True,

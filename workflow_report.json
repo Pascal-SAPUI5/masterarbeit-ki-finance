@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-07-27T14:26:58.537030",
+  "workflow": "write_chapter.sh",
+  "chapter": "4",
+  "quality": "high",
+  "stats": {
+    "chapters_written": 0,
+    "templates_created": 5,
+    "sources_collected": 60,
+    "last_activity": "2025-07-27T14:26:58.536999"
+  },
+  "citations": {
+    "total_verified": 22,
+    "total_used": 0,
+    "most_used": [
+      [
+        "Cate_2025_global_regulatory_frameworks",
+        0
+      ],
+      [
+        "Pamisetty_2024_ai_powered_decision",
+        0
+      ],
+      [
+        "Rane_2023_\u2026_collaboration:_key",
+        0
+      ],
+      [
+        "Pawlicka_2022_sustainable_supply_chain",
+        0
+      ],
+      [
+        "Suryono_2020_challenges_and_trends",
+        0
+      ]
+    ],
+    "last_verification": "2025-07-13T13:55:13.970910",
+    "quality_reports_count": 3
+  },
+  "services": {
+    "mcp_server": "running on port 3000",
+    "qdrant": "starting",
+    "ollama": "not running"
+  }
+}

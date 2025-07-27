@@ -159,42 +159,7 @@ class MemorySystem:
         with open(self.session_file, 'w', encoding='utf-8') as f:
             json.dump(self.session_history, f, indent=2, ensure_ascii=False)
     
-    def create_checkpoint(self, name: str = None):
-        """Erstellt einen Checkpoint des aktuellen Zustands."""
-        if not name:
-            name = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
-        checkpoint = {
-            "name": name,
-            "timestamp": datetime.now().isoformat(),
-            "context": self.context.copy(),
-            "rules": self.rules.copy(),
-            "stats": self.get_current_stats()
-        }
-        
-        checkpoint_file = self.checkpoints_dir / f"checkpoint_{name}.json"
-        with open(checkpoint_file, 'w', encoding='utf-8') as f:
-            json.dump(checkpoint, f, indent=2, ensure_ascii=False)
-        
-        return checkpoint_file
     
-    def restore_checkpoint(self, name: str):
-        """Stellt einen Checkpoint wieder her."""
-        checkpoint_file = self.checkpoints_dir / f"checkpoint_{name}.json"
-        
-        if not checkpoint_file.exists():
-            raise FileNotFoundError(f"Checkpoint nicht gefunden: {name}")
-        
-        with open(checkpoint_file, 'r', encoding='utf-8') as f:
-            checkpoint = json.load(f)
-        
-        self.context = checkpoint["context"]
-        self.rules = checkpoint["rules"]
-        
-        self.save_context()
-        self.save_rules()
-        
-        return checkpoint
     
     def get_current_stats(self) -> Dict[str, Any]:
         """Sammelt aktuelle Projekt-Statistiken."""

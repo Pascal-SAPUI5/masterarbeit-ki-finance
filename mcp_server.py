@@ -22,6 +22,7 @@ from scripts.search_literature import LiteratureSearcher
 from scripts.research_assistant import ResearchAssistant
 from scripts.manage_references import ReferenceManager
 from scripts.citation_quality_control import CitationQualityControl
+from scripts.mba_quality_checker import MBAQualityChecker
 from memory_system import get_memory
 from mcp_server_rag_extension import MCPRAGExtension
 import yaml
@@ -40,6 +41,7 @@ class MasterarbeitMCPServer:
         self.research_assistant = ResearchAssistant()
         self.reference_manager = ReferenceManager()
         self.citation_qc = CitationQualityControl()
+        self.mba_quality_checker = MBAQualityChecker()
         
         # Memory System
         self.memory = get_memory()
@@ -361,6 +363,40 @@ class MasterarbeitMCPServer:
                             "type": "boolean",
                             "default": True,
                             "description": "Detaillierten Report generieren"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "check_mba_quality",
+                "description": "Comprehensive MBA quality assessment with detailed scoring and improvement suggestions",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "chapter_path": {
+                            "type": "string",
+                            "description": "Path to specific chapter to analyze (optional)"
+                        },
+                        "include_literature": {
+                            "type": "boolean",
+                            "default": True,
+                            "description": "Include literature quality analysis"
+                        },
+                        "include_methodology": {
+                            "type": "boolean",
+                            "default": True,
+                            "description": "Include methodology assessment"
+                        },
+                        "include_innovation": {
+                            "type": "boolean",
+                            "default": True,
+                            "description": "Include innovation assessment"
+                        },
+                        "export_format": {
+                            "type": "string",
+                            "enum": ["json", "markdown", "both"],
+                            "default": "markdown",
+                            "description": "Export format for the report"
                         }
                     }
                 }
@@ -710,6 +746,67 @@ class MasterarbeitMCPServer:
                 }
             
             return {"compliance_results": compliance_results}
+        
+        elif tool_name == "check_mba_quality":
+            # Comprehensive MBA quality assessment
+            chapter_path = args.get("chapter_path")
+            include_literature = args.get("include_literature", True)
+            include_methodology = args.get("include_methodology", True)
+            include_innovation = args.get("include_innovation", True)
+            export_format = args.get("export_format", "markdown")
+            
+            # Run quality assessment
+            assessment = self.mba_quality_checker.check_thesis_quality(
+                chapter_path=chapter_path,
+                include_literature=include_literature,
+                include_methodology=include_methodology,
+                include_innovation=include_innovation
+            )
+            
+            # Export results
+            exported_paths = []
+            if export_format in ["json", "both"]:
+                json_path = self.mba_quality_checker.export_assessment(assessment, "json")
+                exported_paths.append(str(json_path))
+            
+            if export_format in ["markdown", "both"]:
+                md_path = self.mba_quality_checker.export_assessment(assessment, "markdown")
+                exported_paths.append(str(md_path))
+            
+            # Prepare response
+            response = {
+                "overall_score": assessment.overall_score,
+                "overall_percentage": assessment.overall_percentage,
+                "predicted_grade": assessment.predicted_grade.replace('_', ' ').title(),
+                "grade_range": assessment.grade_range,
+                "compliance_status": assessment.compliance_status,
+                "criteria_scores": {
+                    k: {
+                        "score": f"{v.current_score:.1f}/{v.max_score}",
+                        "percentage": f"{v.percentage:.1f}%",
+                        "priority": v.priority
+                    } for k, v in assessment.criteria_scores.items()
+                },
+                "high_priority_issues": assessment.high_priority_issues[:3],  # Top 3
+                "improvement_suggestions": [
+                    action["action"] for action in assessment.improvement_plan[:5]  # Top 5
+                ],
+                "exported_reports": exported_paths,
+                "message": f"MBA Quality Assessment completed. Score: {assessment.overall_score:.1f}/100"
+            }
+            
+            # Update memory with quality scores
+            quality_update = {
+                "timestamp": assessment.timestamp,
+                "overall_score": assessment.overall_score,
+                "predicted_grade": assessment.predicted_grade,
+                "criteria_scores": {
+                    k: v.current_score for k, v in assessment.criteria_scores.items()
+                }
+            }
+            self.memory.update_progress({"quality_assessment": quality_update})
+            
+            return response
         
         else:
             # Prüfe ob es ein RAG-Tool ist

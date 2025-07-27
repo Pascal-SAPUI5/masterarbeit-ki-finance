@@ -8,6 +8,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+# Install aiohttp for HTTP server
+RUN pip install aiohttp
+
 # Python-Abhängigkeiten
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -21,5 +24,5 @@ RUN mkdir -p /app/.claude_memory /app/research/q1-sources /app/output /app/writi
 # Port
 EXPOSE 3000
 
-# Starte MCP Server
-CMD ["python", "mcp_server_claude.py"]
+# Starte MCP Server mit HTTP wrapper
+CMD ["python", "mcp_server_http.py"]

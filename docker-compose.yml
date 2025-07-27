@@ -1,11 +1,47 @@
 version: '3.8'
 
+networks:
+  masterarbeit-net:
+    driver: bridge
+    name: masterarbeit-net
+
 services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: masterarbeit-ollama
+    ports:
+      - "11434:11434"  # Standard Ollama port
+    volumes:
+      - ollama-data:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_MAX_LOADED_MODELS=1
+      - OLLAMA_NUM_PARALLEL=4
+      - NUM_THREAD=16
+    networks:
+      - masterarbeit-net
+    deploy:
+      resources:
+        limits:
+          cpus: '12'
+          memory: 16G
+        reservations:
+          cpus: '4'
+          memory: 4G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
   mcp-server:
     build: .
     container_name: masterarbeit-mcp-server
     ports:
-      - "3000:3000"
+      - "3001:3000"  # Changed from 3000 to avoid Grafana conflict
     volumes:
       # Persistente Daten
       - ./.claude_memory:/app/.claude_memory
@@ -29,11 +65,24 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     
+    networks:
+      - masterarbeit-net
+    
+    # Ollama dependency optional - kann auskommentiert werden falls Probleme
+    # depends_on:
+    #   ollama:
+    #     condition: service_healthy
+    
     restart: unless-stopped
     
     # Gesundheitsprüfung
     healthcheck:
-      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:3000/health')"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 40s
+
+volumes:
+  ollama-data:
+    driver: local

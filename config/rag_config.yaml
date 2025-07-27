@@ -1,8 +1,8 @@
 system:
   embedding_model: "all-MiniLM-L6-v2"
   llm_model: "phi3:mini"
-  chunk_size: 256
-  chunk_overlap: 20
+  chunk_size: 512
+  chunk_overlap: 50
 
 paths:
   index_path: "./indexes/"
@@ -16,3 +16,6 @@ search:
 performance:
   cpu_only: true
   max_memory_usage: 80
+  ollama_batch_size: 4  # Batch size for Ollama requests
+  cache_responses: true
+  max_concurrent_requests: 8

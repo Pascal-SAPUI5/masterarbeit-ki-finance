@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "thesis_title": "Implementierung von Agentic Workflows mit SAP BTP: Eine empirische Analyse der Effizienzgewinne durch KI-gestützte Automatisierung unter Berücksichtigung des EU AI Acts",
+    "author": "Test Student",
+    "evaluation_date": "2025-01-27",
+    "generated_at": "2025-07-27T15:41:15.432042"
+  },
+  "executive_summary": {
+    "final_grade": "2.0",
+    "grade_category": "gut",
+    "total_points": 86.0,
+    "percentage": 86.0,
+    "key_strengths": [
+      "Exzellente Leistung in Aufbau Und Form",
+      "Exzellente Leistung in Forschungsfrage Und Literatur",
+      "Exzellente Leistung in Qualitaet Methodische Durchfuehrung",
+      "Exzellente Leistung in Innovationsgrad Relevanz"
+    ],
+    "main_weaknesses": []
+  },
+  "detailed_evaluation": {
+    "aufbau_und_form": {
+      "score": 17.5,
+      "max_points": 20,
+      "percentage": 87.5,
+      "details": {
+        "schluessigkeit_aufbau": {
+          "score": 4.5,
+          "max": 5,
+          "comments": "Sehr gute Strukturierung mit klarem rotem Faden"
+        },
+        "formale_praesentation": {
+          "score": 6.0,
+          "max": 7,
+          "comments": "Einige kleinere Formatierungsfehler"
+        },
+        "nachvollziehbarkeit_quellen": {
+          "score": 7.0,
+          "max": 8,
+          "comments": "Korrekte Zitierweise, vereinzelt fehlende Seitenzahlen"
+        }
+      }
+    },
+    "forschungsfrage_und_literatur": {
+      "score": 26.0,
+      "max_points": 30,
+      "percentage": 86.66666666666667,
+      "details": {
+        "breite_literatur": {
+          "score": 8.5,
+          "max": 10,
+          "comments": "Sehr gute Literaturbreite, könnte mehr Q1-Journals nutzen"
+        },
+        "meta_problemstellung": {
+          "score": 17.5,
+          "max": 20,
+          "comments": "Präzise formulierte Forschungsfrage mit hoher Relevanz"
+        }
+      }
+    },
+    "qualitaet_methodische_durchfuehrung": {
+      "score": 34.0,
+      "max_points": 40,
+      "percentage": 85.0,
+      "details": {
+        "durchfuehrung_methodik": {
+          "score": 17.0,
+          "max": 20,
+          "comments": "Solide Methodik, Stichprobengröße könnte größer sein"
+        },
+        "qualitaet_empirische_ergebnisse": {
+          "score": 17.0,
+          "max": 20,
+          "comments": "Gute Ergebnispräsentation mit klaren Handlungsempfehlungen"
+        }
+      }
+    },
+    "innovationsgrad_relevanz": {
+      "score": 8.5,
+      "max_points": 10,
+      "percentage": 85.0,
+      "details": {
+        "innovationsgrad_nutzen": {
+          "score": 4.5,
+          "max": 5,
+          "comments": "Hoher Innovationsgrad durch Kombination von SAP BTP und Agentic AI"
+        },
+        "selbstaendigkeit_originalitaet": {
+          "score": 4.0,
+          "max": 5,
+          "comments": "Eigenständige Herangehensweise mit kritischer Reflexion"
+        }
+      }
+    }
+  },
+  "literature_quality_assessment": {
+    "score": {
+      "category": "gut_4_punkte",
+      "points": 4,
+      "details": {
+        "aktualitaet": ">70% Publikationen von 2020+",
+        "q1_journals": ">60% Q1-Journals",
+        "internationalitaet": "Gute internationale Verteilung",
+        "doi_verfügbarkeit": ">90% DOI-Verfügbarkeit",
+        "methodik": "Strukturierte und begründete Suchstrategie"
+      },
+      "metrics": {
+        "aktualitaet": 78,
+        "q1_percentage": 68,
+        "doi_coverage": 94,
+        "international_balance": false
+      }
+    },
+    "statistics": {
+      "total_sources": 145,
+      "quality_metrics": {
+        "aktualitaet": {
+          "2020_plus": 78,
+          "2022_plus": 45,
+          "2024_2025": 12
+        },
+        "journal_quality": {
+          "q1_journals": 68,
+          "q2_journals": 22,
+          "other": 10
+        },
+        "geographic_distribution": {
+          "US": 38,
+          "EU": 35,
+          "Asia": 20,
+          "Other": 7
+        },
+        "doi_coverage": 94,
+        "open_access": 42
+      },
+      "top_journals": [
+        {
+          "name": "MIS Quarterly",
+          "count": 8,
+          "impact_factor": 7.92
+        },
+        {
+          "name": "Journal of Strategic Information Systems",
+          "count": 6,
+          "impact_factor": 6.0
+        },
+        {
+          "name": "Information Systems Research",
+          "count": 5,
+          "impact_factor": 5.8
+        }
+      ],
+      "theoretical_frameworks": [
+        {
+          "name": "TOE Framework",
+          "usage_count": 15
+        },
+        {
+          "name": "RBV Theory",
+          "usage_count": 12
+        },
+        {
+          "name": "Dynamic Capabilities",
+          "usage_count": 10
+        }
+      ]
+    },
+    "top_journals": [
+      {
+        "name": "MIS Quarterly",
+        "count": 8,
+        "impact_factor": 7.92
+      },
+      {
+        "name": "Journal of Strategic Information Systems",
+        "count": 6,
+        "impact_factor": 6.0
+      },
+      {
+        "name": "Information Systems Research",
+        "count": 5,
+        "impact_factor": 5.8
+      }
+    ],
+    "theoretical_coverage": [
+      {
+        "name": "TOE Framework",
+        "usage_count": 15
+      },
+      {
+        "name": "RBV Theory",
+        "usage_count": 12
+      },
+      {
+        "name": "Dynamic Capabilities",
+        "usage_count": 10
+      }
+    ]
+  },
+  "final_grade": {
+    "total_points": 86,
+    "percentage": 86,
+    "grade_category": "gut",
+    "numeric_grade": "2.0",
+    "description": "Gute Leistung, die den Anforderungen voll entspricht"
+  },
+  "recommendations": {
+    "priority_improvements": [],
+    "strengths": [
+      "aufbau_und_form",
+      "forschungsfrage_und_literatur",
+      "qualitaet_methodische_durchfuehrung",
+      "innovationsgrad_relevanz"
+    ],
+    "category_percentages": {
+      "aufbau_und_form": 87.5,
+      "forschungsfrage_und_literatur": 86.66666666666667,
+      "qualitaet_methodische_durchfuehrung": 85.0,
+      "innovationsgrad_relevanz": 85.0
+    },
+    "potential_grade_improvement": 0.0,
+    "specific_recommendations": [],
+    "estimated_effort": {
+      "total_hours": 0,
+      "weeks_needed": 1.0,
+      "difficulty": "low",
+      "priority_order": []
+    }
+  },
+  "quality_indicators": {
+    "meets_mba_standards": true,
+    "literature_quality": "gut_4_punkte",
+    "innovation_level": "Sehr innovativ",
+    "recommendation": "Sehr gute Arbeit - Annahme ohne Auflagen"
+  }
+}
