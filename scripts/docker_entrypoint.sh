@@ -1,11 +1,9 @@
 #!/bin/bash
-"""
-Docker Container Entrypoint Script
-==================================
-
-This script handles the startup sequence for the Docker container with
-Chrome/Chromium browser support and research automation capabilities.
-"""
+# Docker Container Entrypoint Script
+# ==================================
+#
+# This script handles the startup sequence for the Docker container with
+# Chrome/Chromium browser support and research automation capabilities.
 
 set -e
 
@@ -62,7 +60,7 @@ start_virtual_display() {
 check_chrome() {
     echo_info "Checking Chrome/Chromium installation..."
     
-    CHROME_BIN=${CHROME_BIN:-/usr/bin/chromium-browser}
+    CHROME_BIN=${CHROME_BIN:-/usr/bin/chromium}
     
     if [ ! -f "$CHROME_BIN" ]; then
         echo_error "Chrome binary not found at $CHROME_BIN"
@@ -131,7 +129,7 @@ cleanup() {
     fi
     
     # Kill any remaining Chrome processes
-    pkill -f chromium-browser || true
+    pkill -f chromium || true
     pkill -f chrome || true
     
     echo_success "Cleanup completed"
@@ -159,8 +157,8 @@ main() {
     
     # Step 3: Check Chrome installation
     if ! check_chrome; then
-        echo_error "Chrome check failed"
-        exit 1
+        echo_warning "Chrome check failed - continuing anyway"
+        # Don't exit - allow container to start for non-browser tasks
     fi
     
     # Step 4: Run health check (optional)
