@@ -441,8 +441,8 @@ class MBAQualityChecker:
         current_year = datetime.now().year
         
         # Aktualität
-        recent = sum(1 for s in sources if s.get("year", 0) >= 2020)
-        very_recent = sum(1 for s in sources if s.get("year", 0) >= 2022)
+        recent = sum(1 for s in sources if self._safe_year_compare(s.get("year", 0), 2020))
+        very_recent = sum(1 for s in sources if self._safe_year_compare(s.get("year", 0), 2022))
         recent_percentage = (recent / total) * 100
         
         if recent_percentage >= 90:
@@ -559,6 +559,16 @@ class MBAQualityChecker:
             "issues": issues,
             "suggestions": suggestions
         }
+    
+    def _safe_year_compare(self, year_value: Any, threshold: int) -> bool:
+        """Safely compare year values, handling string to int conversion."""
+        try:
+            # Convert to int if it's a string
+            year_int = int(year_value) if isinstance(year_value, str) else year_value
+            return year_int >= threshold
+        except (ValueError, TypeError):
+            # If conversion fails, return False
+            return False
     
     def _calculate_grade(self, percentage: float) -> str:
         """Calculate grade based on percentage."""

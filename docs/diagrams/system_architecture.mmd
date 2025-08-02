@@ -1,0 +1,75 @@
+```mermaid
+graph TB
+    subgraph "Client Layer"
+        CC[Claude Code]
+        UI[Web UI/GUI]
+        CLI[Command Line Tools]
+    end
+    
+    subgraph "MCP Interface Layer"
+        MCP[MCP Server]
+        RAG_EXT[RAG Extension]
+        MEM[Memory System]
+    end
+    
+    subgraph "Core Processing Layer"
+        RAG[RAG System]
+        LIT[Literature Manager]
+        REF[Reference Manager]
+        ASSIST[Research Assistant]
+    end
+    
+    subgraph "AI/ML Layer"
+        OLLAMA[Ollama LLM]
+        EMB[Sentence Transformers]
+        OCR[Tesseract OCR]
+    end
+    
+    subgraph "Data Storage Layer"
+        FAISS[FAISS Vector DB]
+        SQLITE[SQLite Memory]
+        FILES[File System]
+    end
+    
+    subgraph "External Services"
+        SCOPUS[Scopus API]
+        WOS[Web of Science]
+        CITAVI[Citavi Integration]
+        DOI[CrossRef DOI]
+    end
+    
+    CC --> MCP
+    UI --> RAG
+    CLI --> LIT
+    
+    MCP --> RAG_EXT
+    MCP --> MEM
+    
+    RAG_EXT --> RAG
+    RAG --> OLLAMA
+    RAG --> EMB
+    LIT --> SCOPUS
+    LIT --> WOS
+    REF --> CITAVI
+    REF --> DOI
+    
+    RAG --> FAISS
+    MEM --> SQLITE
+    RAG --> FILES
+    
+    ASSIST --> OCR
+    
+    classDef client fill:#e1f5fe
+    classDef interface fill:#f3e5f5
+    classDef processing fill:#e8f5e8
+    classDef ai fill:#fff3e0
+    classDef storage fill:#fce4ec
+    classDef external fill:#f1f8e9
+    
+    class CC,UI,CLI client
+    class MCP,RAG_EXT,MEM interface
+    class RAG,LIT,REF,ASSIST processing
+    class OLLAMA,EMB,OCR ai
+    class FAISS,SQLITE,FILES storage
+    class SCOPUS,WOS,CITAVI,DOI external
+```

@@ -1,0 +1,59 @@
+```mermaid
+graph TD
+    A[User Query] --> B{Document Type?}
+    
+    B -->|PDF Upload| C[PDF Processing]
+    B -->|Text Input| D[Text Processing]
+    B -->|Search Query| E[Vector Search]
+    
+    C --> C1[Extract Text]
+    C1 --> C2[OCR if needed]
+    C2 --> C3[Text Chunking]
+    C3 --> C4[Generate Embeddings]
+    C4 --> C5[Store in FAISS]
+    
+    D --> D1[Clean Text]
+    D1 --> D2[Text Chunking]
+    D2 --> D3[Generate Embeddings]
+    D3 --> D4[Store in FAISS]
+    
+    E --> E1[Query Embedding]
+    E1 --> E2[Similarity Search]
+    E2 --> E3[Retrieve Top-K]
+    E3 --> F[Context Assembly]
+    
+    C5 --> E
+    D4 --> E
+    
+    F --> G{LLM Available?}
+    G -->|Yes| H[Generate Answer]
+    G -->|No| I[Return Context Only]
+    
+    H --> J[Format Response]
+    I --> J
+    
+    J --> K[Add Citations]
+    K --> L[Return to User]
+    
+    subgraph "Storage"
+        FAISS_DB[(FAISS Vector DB)]
+        METADATA[(Metadata Store)]
+        CACHE[(Response Cache)]
+    end
+    
+    C5 --> FAISS_DB
+    D4 --> FAISS_DB
+    E2 --> FAISS_DB
+    F --> METADATA
+    H --> CACHE
+    
+    classDef process fill:#e3f2fd
+    classDef decision fill:#fff3e0
+    classDef storage fill:#f1f8e9
+    classDef output fill:#fce4ec
+    
+    class C,D,E,C1,C2,C3,C4,C5,D1,D2,D3,D4,E1,E2,E3,F,H,I,J,K process
+    class B,G decision
+    class FAISS_DB,METADATA,CACHE storage
+    class L output
+```

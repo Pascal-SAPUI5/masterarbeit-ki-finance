@@ -1,295 +1,479 @@
-# Masterarbeit KI-Finance: RAG-System & Forschungsautomatisierung
+# 🤖 AI Finance Master's Thesis Research System
 
-Automatisierte Forschungsumgebung für die Masterarbeit "Agile Prozessautomatisierung und Wissensmanagement durch KI-Agenten: Innovationspotenziale der SAP Business Technology Platform im Finanzwesen". Integriert Literatursuche, RAG-basierte Dokumentenanalyse und akademische Schreibhilfen.
+[![License](https://img.shields.io/badge/license-Academic%20Use-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
+[![Docker](https://img.shields.io/badge/docker-compose-blue.svg)](https://docker.com)
+[![RAG](https://img.shields.io/badge/RAG-Ollama%20phi3:mini-green.svg)](https://ollama.ai)
+[![Status](https://img.shields.io/badge/status-Active%20Development-green.svg)]()
 
-## Projektübersicht
+> **Automated Research Environment for Master's Thesis on AI Agents in Finance**  
+> *"Agile Process Automation and Knowledge Management through AI Agents: Innovation Potential of SAP Business Technology Platform in Financial Services"*
 
-### Kernkomponenten
-- **RAG-System**: CPU-basierte Dokumentensuche mit LLM-Integration (Ollama/phi3:mini)
-- **Literaturverwaltung**: Automatisierte Suche in Q1-Journals mit Citavi-Integration
-- **Research Assistant**: Gliederung, Templates und Fortschrittsverfolgung
-- **Memory System**: Persistente Kontextspeicherung zwischen Sessions
+## 🎯 Project Overview
 
-### Architektur
-- **MCP Server**: Stellt alle Funktionen als Tools für Claude Code bereit
-- **Docker Stack**: PostgreSQL, Redis, Qdrant für Datenmanagement
-- **Memory-basiert**: Projektkontext und Regeln werden dauerhaft gespeichert
+This is a comprehensive research automation system designed specifically for a Master's thesis on AI agents in the financial sector. The system integrates literature search, RAG-based document analysis, and academic writing tools to accelerate research and ensure academic quality standards.
 
-## 🆕 Für neue Nutzer: Anpassung an Ihre Masterarbeit
+### 🏗️ Core Architecture
 
-**➡️ Siehe [ANPASSUNG_NEUE_MASTERARBEIT.md](ANPASSUNG_NEUE_MASTERARBEIT.md) für die vollständige Anleitung!**
-
-Diese Vorlage ist für "KI-Agenten im Finanzwesen" konfiguriert. Für Ihr eigenes Thema müssen Sie:
-- 6 Haupt-Konfigurationsdateien anpassen (ca. 2-3 Stunden)
-- Ihre Gliederung, Keywords und Theorien eintragen
-- Universitäts-spezifische Anforderungen konfigurieren
-
-## Installation
-
-### 1. Systemvoraussetzungen
-- Linux/WSL mit Ubuntu 22.04+
-- 16 GB RAM (32 GB empfohlen)
-- Python 3.10+
-- Git und Docker
-
-### 2. Abhängigkeiten installieren
-```bash
-# Virtual Environment aktivieren
-source venv/bin/activate
-
-# Python Dependencies (CPU-optimiert)
-pip install -r requirements.txt --constraint constraints.txt
-
-# Ollama für LLM (optional aber empfohlen für intelligente Antworten)
-curl -fsSL https://ollama.ai/install.sh | sh
-ollama serve &
-ollama pull phi3:mini  # 2.2 GB, CPU-optimiert
+```mermaid
+graph TB
+    A[Claude Code] --> B[MCP Server]
+    B --> C[RAG System]
+    B --> D[Literature Manager]
+    B --> E[Memory System]
+    
+    C --> F[Ollama/phi3:mini]
+    C --> G[FAISS Vector DB]
+    D --> H[Q1 Journal Search]
+    D --> I[Citavi Integration]
+    E --> J[Persistent Context]
+    
+    F --> K[Intelligent Responses]
+    G --> L[Document Embeddings]
+    H --> M[Quality Sources]
+    I --> N[Citation Management]
+    J --> O[Session Continuity]
 ```
 
-### 3. Projekt initialisieren
+### ✨ Key Features & Benefits
+
+- **🔍 Intelligent Literature Search**: Automated Q1 journal discovery with impact factor validation
+- **📚 RAG-Powered Document Analysis**: CPU-optimized retrieval with Ollama/phi3:mini integration
+- **📝 Academic Writing Assistant**: Structured templates following German MBA standards
+- **🔗 Citation Management**: Automated Citavi integration with APA7 formatting
+- **💾 Persistent Memory**: Context preservation across Claude Code sessions
+- **🎓 Quality Assurance**: Built-in validation for academic standards and citation quality
+- **🐳 Docker Infrastructure**: Self-contained environment with PostgreSQL, Redis, Qdrant
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **System**: Linux/WSL2 with Ubuntu 22.04+
+- **Memory**: 16 GB RAM (32 GB recommended for large document sets)
+- **Python**: 3.10+ with pip
+- **Docker**: Latest version with docker-compose
+- **Optional**: Git for version control
+
+### 1. Installation
+
 ```bash
-# Setup-Script ausführen (erstellt Verzeichnisse, lädt Modelle)
+# Clone the repository
+git clone <repository-url>
+cd masterarbeit-ki-finance
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies (CPU-optimized)
+pip install -r requirements.txt --constraint constraints.txt
+
+# Install Ollama for intelligent responses (optional but recommended)
+curl -fsSL https://ollama.ai/install.sh | sh
+ollama serve &
+ollama pull phi3:mini  # 2.2 GB, CPU-optimized model
+```
+
+### 2. Initialize Project
+
+```bash
+# Setup directories and models
 cd scripts && ./setup_research.sh
 
-# Docker-Services starten
+# Start Docker services
 docker-compose up -d
 
-# Memory System initialisieren
+# Initialize memory system
 python memory_system.py init
 ```
 
-## Nutzung
+### 3. MCP Integration with Claude Code
 
-### 📚 Beispiel-Workflow: Methodenkapitel mit PRISMA-Framework
-
-Angenommen, Sie schreiben: *"Das Methodenkapitel operationalisiert den Design-Science-Ansatz durch eine methodische Triangulation aus systematischer Literaturanalyse, semi-strukturierten Experteninterviews und prototypischer Implementierung. Die systematische Literaturanalyse folgt dem PRISMA-Framework und fokussiert auf peer-reviewed Publikationen der Jahre 2020-2025..."*
-
-#### 1️⃣ **Literatursuche mit MCP Tools** (Claude Code führt aus)
 ```bash
-# Claude nutzt search_literature Tool für PRISMA-konforme Suche
-search_literature --query "PRISMA framework systematic literature review guidelines" \
-                 --databases "IEEE Xplore, ACM Digital Library, ScienceDirect" \
-                 --years "2020-2025" \
-                 --quality "q1"
+# Add MCP server to Claude Code
+claude mcp add masterarbeit-finance ./start_mcp_server.sh
 
-# Ergebnis: 15 relevante Papers gefunden, z.B.:
-# - Moher et al. (2020): "PRISMA 2020 statement" 
-# - Page et al. (2021): "The PRISMA 2020 statement: an updated guideline"
+# Or use direct integration
+./install_mcp_claude.sh
 ```
 
-#### 2️⃣ **PDFs einbetten und indexieren**
-```bash
-# Papers herunterladen und in Projekt-Struktur ablegen
-literatur/
-├── methodik/
-│   ├── Moher_2020_PRISMA_statement.pdf
-│   ├── Page_2021_PRISMA_updated_guideline.pdf
-│   └── Tricco_2022_PRISMA_extensions.pdf
+## 📖 Usage Examples
 
-# RAG-System indexiert Dokumente
-python scripts/rag_system.py index --path literatur/methodik/ --cpu-only
-# → Extrahiert Text, Metadaten, erstellt Embeddings
+### 🔬 Research Workflow: PRISMA Literature Review
+
+```bash
+# 1. Search Q1 journals for PRISMA methodology
+python scripts/search_literature.py \
+  --query "PRISMA framework systematic literature review" \
+  --databases "IEEE Xplore,ACM Digital Library,ScienceDirect" \
+  --years "2020-2025" \
+  --quality "q1"
+
+# Result: 15 relevant papers found
 ```
 
-#### 3️⃣ **Präzise Zitationsstellen finden**
+### 📄 Document Analysis with RAG
+
 ```bash
-# Suche nach konkreten Aussagen für korrekte Zitation
+# 2. Index downloaded PDFs
+python scripts/rag_system.py index \
+  --path literatur/methodik/ \
+  --cpu-only
+
+# 3. Intelligent search with context
 python scripts/rag_system.py search \
-  "PRISMA framework checklist items systematic review" --top-k 5
+  "PRISMA checklist items systematic review methodology" \
+  --top-k 5
 
-# Antwort mit Ollama/LLM:
+# AI Response with Ollama:
 {
-  "answer": "Das PRISMA 2020 Framework definiert eine 27-Item Checkliste für systematische Reviews. Die Kern-Items umfassen: Title (Item 1), Abstract (Item 2), Introduction mit Rationale (Item 3) und Objectives (Item 4). Besonders wichtig für die Methodendarstellung sind Items 6-9, die Search Strategy, Selection Process, Data Collection und Study Risk of Bias Assessment beschreiben.",
-  
+  "answer": "The PRISMA 2020 Framework defines a 27-item checklist for systematic reviews...",
   "sources": [{
-    "information": "The PRISMA 2020 statement comprises a 27-item checklist addressing the introduction, methods, results and discussion sections of a systematic review report",
-    "source": "Page et al., 2021, S. 3",
-    "citation": "(Page et al., 2021, S. 3)",
-    "context": "...The checklist items guide authors..."
+    "citation": "(Page et al., 2021, p. 3)",
+    "context": "The checklist items guide authors through..."
   }]
 }
 ```
 
-#### 4️⃣ **Korrekte Zitation generieren**
+### ✍️ Academic Writing Integration
+
 ```bash
-# MCP Tool verify_citations prüft und formatiert
-verify_citations --text "Die systematische Literaturanalyse folgt dem PRISMA-Framework" \
-                --source "Page et al. 2021"
-
-# Output:
-"Die systematische Literaturanalyse folgt dem PRISMA-Framework (Page et al., 2021, S. 3)"
-
-# Vollständige Referenz für Literaturverzeichnis:
-"Page, M. J., McKenzie, J. E., Bossuyt, P. M., et al. (2021). The PRISMA 2020 statement: 
-an updated guideline for reporting systematic reviews. BMJ, 372, n71."
-```
-
-#### 5️⃣ **Integration in Thesis-Dokument**
-```bash
-# Template mit korrekten Zitationen erstellen
+# 4. Generate structured content
 python scripts/research_assistant.py template \
   --chapter "Methodik" \
   --section "Systematische Literaturanalyse" \
   --citations "Page2021,Moher2020"
 
-# Citavi-Export für Literaturverzeichnis
-python scripts/manage_references.py --export citavi \
-  --papers "Page2021,Moher2020,Tricco2022"
+# 5. Citation quality control
+python scripts/citation_quality_control.py verify \
+  --text "Die systematische Literaturanalyse folgt dem PRISMA-Framework" \
+  --source "Page et al. 2021"
+
+# Output: "Die systematische Literaturanalyse folgt dem PRISMA-Framework (Page et al., 2021, S. 3)"
 ```
 
-### 🔄 Workflow-Diagramm
+### 📊 Memory System for Context Persistence
 
-```
-[Forschungsfrage] → [MCP: search_literature] → [15 Papers gefunden]
-        ↓                                              ↓
-[PDF Download] ← [Relevanz-Prüfung] ← [Quality Check: Q1 Journals]
-        ↓
-[RAG Indexierung] → [Embeddings] → [FAISS Vector DB]
-        ↓
-[Zitat-Suche] → [Ollama/LLM] → [Präzise Textstellen]
-        ↓
-[verify_citations] → [APA-Format] → [Integration in Thesis]
-        ↓
-[Citavi Export] → [Literaturverzeichnis]
-```
-
-### Forschungs-Workflow (Standard Commands)
 ```bash
-# 1. Literatur durchsuchen
-python scripts/search_literature.py --query "AI agents finance" --quality q1
+# Store research context
+python -c "from memory_system import get_memory; get_memory().add_note('PRISMA methodology validated')"
 
-# 2. Referenzen verwalten
-python scripts/manage_references.py --import results.json --citavi
-
-# 3. PDFs indizieren für RAG
-python scripts/rag_system.py index --path literatur/finance/ --cpu-only
-
-# 4. Dokumente durchsuchen (mit Ollama für intelligente Antworten)
-python scripts/rag_system.py search "SAP BTP capabilities" --top-k 5
-# Falls Ollama nicht läuft, automatischer Fallback zu Retrieval-only
-
-# 5. Schreibvorlagen erstellen
-python scripts/research_assistant.py template --chapter "Einleitung" --section "Problemstellung"
-```
-
-### Memory System Commands
-```bash
-# Kontext abrufen
+# Retrieve session context
 python -c "from memory_system import get_memory; print(get_memory().get_context())"
 
-# Notizen hinzufügen
-python -c "from memory_system import get_memory; get_memory().add_note('Important finding')"
-
-# Fortschritt aktualisieren
-python scripts/research_assistant.py progress --update "Kapitel 2 fertig"
-
-# Checkpoint erstellen
-python -c "from memory_system import get_memory; get_memory().create_checkpoint('chapter2_complete')"
+# Create progress checkpoint
+python -c "from memory_system import get_memory; get_memory().create_checkpoint('literature_review_complete')"
 ```
 
-### RAG-System (Erweitert)
+## ⚙️ Configuration
+
+### Key Configuration Files
+
+| File | Purpose | Key Settings |
+|------|---------|--------------|
+| `config/research-criteria.yaml` | Literature quality standards | Q1 journals, impact factors, publication years |
+| `config/rag_config.yaml` | RAG system parameters | Model: phi3:mini, CPU-only mode |
+| `config/writing-style.yaml` | German MBA standards | Citation style: APA7, academic formatting |
+| `config/mba-standards.json` | Quality criteria | Evaluation rubrics, deadlines |
+| `.claude_memory/` | Persistent context | Session history, research notes |
+
+### Environment Variables
+
 ```bash
-# GUI für interaktive Suche
-python scripts/rag_gui.py --port 8501
+# Create .env file (not in git)
+cp .env.example .env
 
-# Batch-Verarbeitung
-python scripts/rag_system.py batch --input queries.txt --output results.json
+# Required for API access
+SCOPUS_API_KEY=your_scopus_key
+WOS_API_KEY=your_wos_key
+CROSSREF_EMAIL=your.email@university.edu
+```
 
-# Performance-Monitoring
+## 🏗️ Architecture & Components
+
+### System Components
+
+```
+├── 🧠 Core Services
+│   ├── MCP Server (Claude Code integration)
+│   ├── RAG System (Document intelligence)
+│   ├── Memory System (Context persistence)
+│   └── Quality Control (Academic standards)
+│
+├── 📚 Research Tools
+│   ├── Literature Search (Q1 journal discovery)
+│   ├── Reference Manager (Citavi integration)
+│   ├── Citation Control (APA7 formatting)
+│   └── Progress Tracking (Milestone management)
+│
+├── 🐳 Infrastructure
+│   ├── Ollama (LLM inference)
+│   ├── FAISS (Vector search)
+│   ├── PostgreSQL (Structured data)
+│   └── Redis (Caching)
+│
+└── 🎓 Academic Features
+    ├── MBA Quality Checker
+    ├── PRISMA Compliance
+    ├── Citation Validation
+    └── Progress Dashboard
+```
+
+### AI/ML Workflows
+
+1. **Document Ingestion**: PDF → Text extraction → Chunking → Embeddings → Vector DB
+2. **Intelligent Retrieval**: Query → Embedding → Vector search → Context ranking
+3. **AI Response Generation**: Context + Query → Ollama/phi3:mini → Structured answer
+4. **Citation Integration**: Source validation → APA7 formatting → Quality control
+
+## 🔧 Development Setup
+
+### Running Tests
+
+```bash
+# Full test suite
+pytest tests/ -v
+
+# RAG system self-test
+python scripts/rag_system.py test --self-test
+
+# MBA quality validation
+python tests/test_mba_quality.py
+
+# Code formatting
+black scripts/*.py
+```
+
+### Docker Services
+
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f ollama mcp-server
+
+# Health checks
+curl http://localhost:11434/api/tags  # Ollama
+curl http://localhost:3001/health     # MCP Server
+```
+
+### Performance Monitoring
+
+```bash
+# System resources
+python -c "import psutil; print(f'RAM: {psutil.virtual_memory().percent}%')"
+
+# Ollama status
+ollama list
+curl -s http://localhost:11434/api/version
+
+# RAG system statistics
 python scripts/rag_system.py stats
 ```
 
-## Konfiguration
+## 📊 API Documentation
 
-### Wichtige Config-Dateien
-- `config/research-criteria.yaml`: Q1-Journal Kriterien, Publikationsjahre
-- `config/writing-style.yaml`: Deutsche MBA-Schreibrichtlinien
-- `config/mba-standards.json`: Bewertungskriterien, Deadlines
-- `config/rag_config.yaml`: RAG-System Parameter (LLM-Modell: phi3:mini)
-- `.claude_memory/`: Persistenter Projektkontext
+### MCP Tools for Claude Code
 
-### API-Integration (Optional)
+The system provides specialized MCP tools for seamless integration with Claude Code:
+
+#### Literature Management
+- `search_literature` - Q1 journal database search
+- `manage_references` - Citavi integration and export
+- `verify_citations` - Citation quality control
+
+#### Document Intelligence
+- `rag_search` - RAG-powered document search
+- `analyze_document` - PDF content analysis
+- `extract_citations` - Automatic citation extraction
+
+#### Academic Writing
+- `create_writing_template` - Structured chapter templates
+- `quality_check` - MBA standards validation
+- `progress_update` - Milestone tracking
+
+### REST API Endpoints
+
 ```bash
-# .env Datei erstellen (nicht in Git)
-cp .env.example .env
-# Dann ausfüllen mit Ihren Zugangsdaten
+# Health check
+GET /health
+
+# Literature search
+POST /api/search
+{
+  "query": "AI agents finance",
+  "databases": ["scopus", "wos"],
+  "quality": "q1"
+}
+
+# RAG search
+POST /api/rag/search
+{
+  "query": "PRISMA methodology",
+  "top_k": 5,
+  "use_llm": true
+}
 ```
 
-**Datenbank-APIs:**
-```env
-SCOPUS_API_KEY=your_key
-WOS_API_KEY=your_key
-CROSSREF_EMAIL=ihre.email@uni.de  # Für höhere Rate Limits
-```
+## 🧪 Testing & Validation
 
-## Projektstruktur
-```
-├── scripts/              # Hauptprogramme
-│   ├── rag_system.py     # RAG-Kern
-│   ├── search_literature.py
-│   ├── manage_references.py
-│   └── research_assistant.py
-├── config/               # Konfigurationsdateien  
-├── research/             # Validierte Literatur
-├── writing/              # Templates und Drafts
-├── memory_system.py      # Kontextpersistierung
-├── mcp_server.py         # Claude Code Integration
-└── docker-compose.yml    # Infrastructure
-```
+### Test Coverage
 
-## Troubleshooting
+- **Unit Tests**: Core functionality validation
+- **Integration Tests**: MCP server integration
+- **Performance Tests**: RAG system benchmarks
+- **Quality Tests**: Academic standards compliance
 
-### Häufige Probleme
-- **CUDA nicht gefunden**: System nutzt automatisch CPU-Versionen (PyTorch+cpu, faiss-cpu)
-- **Memory-Fehler**: Reduziere `chunk_size` in `config/rag_config.yaml`
-- **Ollama Connection refused**: `ollama serve &` vor der Nutzung starten
-- **Ollama command not found**: Nach Installation neue Shell öffnen oder `export PATH=$PATH:/usr/local/bin`
-- **Citavi nicht gefunden**: Pfad in `config/api_keys.yaml` setzen
+### Validation Checklist
 
-### Performance-Optimierung
+- [ ] Literature search returns Q1 journals only
+- [ ] Citations follow APA7 format
+- [ ] RAG system provides accurate source attribution
+- [ ] Memory system preserves context across sessions
+- [ ] Ollama integration works with phi3:mini model
+
+## 🚀 Deployment
+
+### Production Deployment
+
 ```bash
-# RAM-Überwachung
-python -c "import psutil; print(f'RAM: {psutil.virtual_memory().percent}%')"
+# Build optimized Docker images
+docker-compose -f docker-compose.prod.yml build
 
-# Ollama Status prüfen
-ollama list  # Zeigt geladene Modelle
-curl -s http://localhost:11434/api/version  # Server-Status
+# Deploy with resource limits
+docker-compose -f docker-compose.prod.yml up -d
 
-# Modell-Cache löschen (bei Problemen)
+# Configure reverse proxy (nginx)
+sudo cp config/nginx.conf /etc/nginx/sites-available/masterarbeit
+sudo ln -s /etc/nginx/sites-available/masterarbeit /etc/nginx/sites-enabled/
+sudo systemctl reload nginx
+```
+
+### Performance Tuning
+
+```bash
+# Optimize for large document sets
+export FAISS_OMP_NUM_THREADS=8
+export PYTORCH_NUM_THREADS=16
+
+# Memory optimization
+echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+```
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| CUDA not found | System automatically uses CPU versions (PyTorch+cpu, faiss-cpu) |
+| Memory errors | Reduce `chunk_size` in `config/rag_config.yaml` |
+| Ollama connection refused | Run `ollama serve &` before usage |
+| Ollama command not found | Open new shell after installation or `export PATH=$PATH:/usr/local/bin` |
+| Citavi not found | Set path in `config/api_keys.yaml` |
+
+### Performance Optimization
+
+```bash
+# Clear model cache
 rm -rf ~/.cache/huggingface/transformers/
 
-# Index neu erstellen
+# Rebuild search index
 rm -rf indexes/ && python scripts/rag_system.py index --path literatur/ --cpu-only
+
+# Monitor system resources
+htop
+docker stats
 ```
 
-### Logs und Debugging
+### Debugging
+
 ```bash
-# Detaillierte Logs
+# Verbose logging
 export PYTHONPATH=$PWD && python scripts/rag_system.py search "test" --verbose
 
-# Memory System Status
+# Memory system status
 python memory_system.py status
 
-# Docker Logs
-docker-compose logs -f qdrant postgres redis
+# Docker service logs
+docker-compose logs -f --tail=100
 ```
 
-## Entwicklung
+## 🤝 Contributing
 
-### MCP Server für Claude Code
-Das Projekt funktioniert als MCP-Server für Claude Code. Verfügbare Tools:
-- `search_literature` - Datenbanksuche
-- `manage_references` - Citavi-Integration  
-- `create_writing_template` - Strukturierte Templates
-- `verify_citations` - Qualitätskontrolle
-- Memory-Tools für Kontextpersistierung
+### Adaptation for New Thesis Topics
 
-### Tests ausführen
-```bash
-pytest tests/ -v
-python scripts/rag_system.py test --self-test
-black scripts/*.py  # Code-Formatierung
-```
+**➡️ See [ANPASSUNG_NEUE_MASTERARBEIT.md](ANPASSUNG_NEUE_MASTERARBEIT.md) for complete adaptation guide!**
+
+This template is configured for "AI Agents in Finance". For your own topic:
+
+1. **Configuration Files** (~2-3 hours):
+   - Update keywords in `config/research-criteria.yaml`
+   - Modify thesis outline in `writing/thesis_outline.json`
+   - Adjust quality criteria for your field
+   - Configure university-specific requirements
+
+2. **Content Templates**:
+   - Customize writing templates in `writing/templates/`
+   - Update theoretical frameworks
+   - Adapt methodology sections
+
+3. **Search Configuration**:
+   - Add relevant databases for your field
+   - Modify search keywords and exclusion criteria
+   - Configure journal rankings specific to your discipline
+
+### Development Guidelines
+
+- Follow academic integrity standards
+- Maintain citation accuracy
+- Test RAG responses for factual correctness
+- Document configuration changes
+- Backup research data regularly
+
+## 📜 License
+
+This project is licensed for **Academic Use Only**. See [LICENSE](LICENSE) for details.
+
+**Academic Integrity Notice**: This system is designed to assist with research and citation management. Users are responsible for:
+- Verifying all citations and sources
+- Ensuring compliance with university plagiarism policies
+- Maintaining academic integrity in all generated content
+- Properly attributing all sources according to academic standards
+
+## 📞 Support & Resources
+
+### 📖 Documentation
+
+Comprehensive documentation is available in the `/docs` directory:
+
+- **[Architecture Guide](docs/architecture.md)**: System design, components, and data flows
+- **[API Reference](docs/api-reference.md)**: Complete API documentation with examples
+- **[Deployment Guide](docs/deployment.md)**: Production deployment instructions
+- **[Configuration Guide](docs/configuration.md)**: Detailed configuration options
+- **[Development Guide](docs/development.md)**: Developer setup and contribution guidelines
+- **[Troubleshooting Guide](docs/troubleshooting.md)**: Common issues and solutions
+
+### 🤝 Getting Help
+
+- **GitHub Issues**: [Report bugs and feature requests](https://github.com/your-repo/issues)
+- **Documentation**: Check the `/docs` folder for detailed guides
+- **University Support**: Contact your thesis supervisor for academic guidance
+- **Technical Support**: See [troubleshooting guide](docs/troubleshooting.md) or create an issue
+
+## 🔄 Recent Updates
+
+- **v2.1.0**: Enhanced Ollama integration with phi3:mini model
+- **v2.0.0**: Complete MCP server rewrite for Claude Code
+- **v1.9.0**: Added MBA quality validation system
+- **v1.8.0**: Implemented PRISMA compliance checking
+- **v1.7.0**: Enhanced citation quality control
 
 ---
-**Letztes Update**: Januar 2025 | **Status**: Aktive Entwicklung | **Python**: 3.10+ | **Lizenz**: Academic Use 
+
+**Last Updated**: August 2025 | **Status**: Active Development | **Python**: 3.10+ | **License**: Academic Use
+
+⭐ **Star this repository** if it helps with your research!

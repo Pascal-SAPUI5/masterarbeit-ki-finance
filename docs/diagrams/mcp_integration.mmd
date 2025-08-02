@@ -1,0 +1,67 @@
+```mermaid
+sequenceDiagram
+    participant CC as Claude Code
+    participant MCP as MCP Server
+    participant RAG as RAG Extension
+    participant LLM as Ollama LLM
+    participant DB as Vector DB
+    participant EXT as External APIs
+    
+    Note over CC, EXT: Document Search Workflow
+    
+    CC->>MCP: search_documents(query, top_k=5)
+    MCP->>RAG: process_search_request()
+    RAG->>DB: vector_similarity_search()
+    DB-->>RAG: top_k_documents
+    RAG->>LLM: generate_answer(query, context)
+    LLM-->>RAG: enhanced_response
+    RAG-->>MCP: formatted_results
+    MCP-->>CC: search_response
+    
+    Note over CC, EXT: Literature Search Workflow
+    
+    CC->>MCP: search_literature(query, databases)
+    MCP->>RAG: process_literature_search()
+    RAG->>EXT: scopus_api_search()
+    RAG->>EXT: wos_api_search()
+    EXT-->>RAG: api_results
+    RAG->>RAG: quality_filtering()
+    RAG->>RAG: format_citations()
+    RAG-->>MCP: literature_results
+    MCP-->>CC: search_response
+    
+    Note over CC, EXT: Document Indexing Workflow
+    
+    CC->>MCP: index_documents(path, options)
+    MCP->>RAG: process_indexing_request()
+    RAG->>RAG: extract_text_from_pdfs()
+    RAG->>RAG: chunk_documents()
+    RAG->>RAG: generate_embeddings()
+    RAG->>DB: store_vectors()
+    DB-->>RAG: indexing_complete
+    RAG-->>MCP: indexing_results
+    MCP-->>CC: status_response
+    
+    Note over CC, EXT: Memory Operations
+    
+    CC->>MCP: store_context(type, data)
+    MCP->>RAG: process_memory_storage()
+    RAG->>DB: store_context_data()
+    DB-->>RAG: storage_confirmed
+    RAG-->>MCP: storage_result
+    MCP-->>CC: confirmation
+    
+    CC->>MCP: retrieve_context(type, filters)
+    MCP->>RAG: process_memory_retrieval()
+    RAG->>DB: query_context_data()
+    DB-->>RAG: context_results
+    RAG-->>MCP: formatted_context
+    MCP-->>CC: context_data
+    
+    Note over CC, EXT: Error Handling
+    
+    CC->>MCP: invalid_request()
+    MCP->>RAG: validate_request()
+    RAG-->>MCP: validation_error
+    MCP-->>CC: error_response
+```

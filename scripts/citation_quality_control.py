@@ -339,6 +339,209 @@ The following sentences appear to need citations:
         
         return str(report_path)
     
+    def verify_source(self, source_info: Dict[str, any]) -> Dict[str, any]:
+        """
+        Verify a source citation and return verification details.
+        
+        Args:
+            source_info: Dictionary containing source information with fields like:
+                        title, authors, year, journal, doi, etc.
+        
+        Returns:
+            Dictionary with verification results:
+            {
+                'verified': bool,     # Overall verification status
+                'valid': bool,        # Alias for verified (backward compatibility)
+                'issues': List[str],  # List of validation issues
+                'details': Dict,      # Detailed verification information
+                'errors': List[str]   # Deprecated alias for issues
+            }
+        """
+        if not isinstance(source_info, dict):
+            return {
+                'verified': False,
+                'valid': False,
+                'issues': ['Invalid source format: expected dictionary'],
+                'details': {'error': 'Source must be a dictionary'},
+                'errors': ['Invalid source format: expected dictionary']
+            }
+        
+        issues = []
+        details = {
+            'source_id': source_info.get('id', 'unknown'),
+            'title': source_info.get('title', ''),
+            'verification_timestamp': self._get_timestamp(),
+            'quality_checks': {}
+        }
+        
+        # Check required fields
+        required_fields = self.quality_criteria.get("required_fields", ["authors", "year", "title", "journal"])
+        missing_fields = []
+        
+        for field in required_fields:
+            if not source_info.get(field):
+                missing_fields.append(field)
+                issues.append(f"Missing required field: {field}")
+        
+        details['quality_checks']['required_fields'] = {
+            'required': required_fields,
+            'missing': missing_fields,
+            'passed': len(missing_fields) == 0
+        }
+        
+        # Validate year
+        year_valid = True
+        try:
+            year = source_info.get('year')
+            if year:
+                year_int = int(year) if isinstance(year, str) else year
+                min_year = self.quality_criteria.get("min_year", 2020)
+                
+                if year_int < min_year:
+                    issues.append(f"Publication year {year_int} is before minimum required year {min_year}")
+                    year_valid = False
+                elif year_int > 2025:  # Reasonable upper bound
+                    issues.append(f"Publication year {year_int} appears to be in the future")
+                    year_valid = False
+        except (ValueError, TypeError):
+            issues.append(f"Invalid year format: {source_info.get('year')}")
+            year_valid = False
+        
+        details['quality_checks']['year'] = {
+            'value': source_info.get('year'),
+            'valid': year_valid,
+            'min_required': self.quality_criteria.get("min_year", 2020)
+        }
+        
+        # Validate authors
+        authors = source_info.get('authors', [])
+        authors_valid = True
+        
+        if not authors:
+            issues.append("No authors specified")
+            authors_valid = False
+        elif not isinstance(authors, list):
+            issues.append("Authors should be provided as a list")
+            authors_valid = False
+        elif len(authors) == 0:
+            issues.append("Authors list is empty")
+            authors_valid = False
+        
+        details['quality_checks']['authors'] = {
+            'count': len(authors) if isinstance(authors, list) else 0,
+            'valid': authors_valid,
+            'names': authors if isinstance(authors, list) else []
+        }
+        
+        # Validate journal quality
+        journal = source_info.get('journal', '')
+        journal_quality = self._assess_journal_quality(source_info)
+        
+        details['quality_checks']['journal'] = journal_quality
+        
+        if not journal_quality['is_quality_journal']:
+            issues.append(journal_quality['message'])
+        
+        # Check DOI format if present
+        doi = source_info.get('doi', '')
+        doi_valid = True
+        
+        if doi:
+            # Basic DOI format validation
+            if not re.match(r'^10\.\d+/.+', doi):
+                issues.append(f"Invalid DOI format: {doi}")
+                doi_valid = False
+        
+        details['quality_checks']['doi'] = {
+            'present': bool(doi),
+            'valid': doi_valid,
+            'value': doi
+        }
+        
+        # Check for additional quality indicators
+        quality_indicators = []
+        if source_info.get('impact_factor'):
+            try:
+                impact_factor = float(source_info['impact_factor'])
+                quality_indicators.append(f"Impact Factor: {impact_factor}")
+                details['quality_checks']['impact_factor'] = impact_factor
+            except (ValueError, TypeError):
+                issues.append(f"Invalid impact factor: {source_info.get('impact_factor')}")
+        
+        if source_info.get('quartile'):
+            quartile = source_info['quartile']
+            quality_indicators.append(f"Quartile: {quartile}")
+            details['quality_checks']['quartile'] = quartile
+        
+        details['quality_indicators'] = quality_indicators
+        
+        # Overall verification status
+        verified = len(issues) == 0
+        
+        # Determine severity of issues
+        critical_issues = [issue for issue in issues if any(keyword in issue.lower() 
+                          for keyword in ['missing required', 'invalid format', 'no authors'])]
+        
+        if critical_issues:
+            verified = False
+            details['critical_issues'] = critical_issues
+        
+        result = {
+            'verified': verified,
+            'valid': verified,  # Backward compatibility
+            'issues': issues,
+            'details': details,
+            'errors': issues  # Backward compatibility
+        }
+        
+        return result
+    
+    def _assess_journal_quality(self, source_info: Dict[str, any]) -> Dict[str, any]:
+        """Assess the quality of a journal."""
+        journal = source_info.get('journal', '')
+        
+        # Check if it's in our Q1 journals list
+        q1_journals = self.quality_criteria.get("q1_journals", [])
+        is_q1_listed = any(q1_journal.lower() in journal.lower() for q1_journal in q1_journals)
+        
+        # Check quartile information
+        quartile = source_info.get('quartile', '').upper()
+        impact_factor = source_info.get('impact_factor', 0)
+        
+        try:
+            impact_factor = float(impact_factor) if impact_factor else 0
+        except (ValueError, TypeError):
+            impact_factor = 0
+        
+        is_quality_journal = False
+        message = ""
+        
+        if is_q1_listed:
+            is_quality_journal = True
+            message = f"Journal '{journal}' is in Q1 journals list"
+        elif quartile == 'Q1':
+            is_quality_journal = True
+            message = f"Journal '{journal}' is marked as Q1"
+        elif impact_factor >= 3.0:
+            is_quality_journal = True
+            message = f"Journal '{journal}' has high impact factor ({impact_factor})"
+        else:
+            message = f"Journal '{journal}' quality cannot be verified (not in Q1 list, impact factor: {impact_factor})"
+        
+        return {
+            'journal_name': journal,
+            'is_q1_listed': is_q1_listed,
+            'quartile': quartile,
+            'impact_factor': impact_factor,
+            'is_quality_journal': is_quality_journal,
+            'message': message
+        }
+    
+    def _get_timestamp(self) -> str:
+        """Get current timestamp for verification records."""
+        from datetime import datetime
+        return datetime.now().isoformat()
+
     def check_document_citations(self, file_path: str) -> Dict[str, any]:
         """Check all citations in a document."""
         path = Path(file_path)

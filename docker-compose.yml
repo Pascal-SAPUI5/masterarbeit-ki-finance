@@ -10,7 +10,7 @@ services:
     image: ollama/ollama:latest
     container_name: masterarbeit-ollama
     ports:
-      - "11434:11434"  # Standard Ollama port
+      - "11435:11434"  # Changed to avoid conflict with system Ollama
     volumes:
       - ollama-data:/root/.ollama
     environment:

@@ -1300,6 +1300,39 @@ class MasterarbeitMCPServer:
         
         return q1_journals.get(category, [])
     
+    def _safe_year_compare(self, year_value: Any, threshold: int) -> bool:
+        """Safely compare year values, handling string to int conversion."""
+        try:
+            # Convert to int if it's a string
+            year_int = int(year_value) if isinstance(year_value, str) else year_value
+            return year_int >= threshold
+        except (ValueError, TypeError):
+            # If conversion fails, return False
+            return False
+    
+    def _safe_numeric_compare(self, value1: Any, value2: Any, operator: str = ">=") -> bool:
+        """Safely compare numeric values, handling string to number conversion."""
+        try:
+            # Convert to float to handle both int and float comparisons
+            num1 = float(value1) if isinstance(value1, str) else value1
+            num2 = float(value2) if isinstance(value2, str) else value2
+            
+            if operator == ">=":
+                return num1 >= num2
+            elif operator == "<=":
+                return num1 <= num2
+            elif operator == ">":
+                return num1 > num2
+            elif operator == "<":
+                return num1 < num2
+            elif operator == "==":
+                return num1 == num2
+            else:
+                return False
+        except (ValueError, TypeError):
+            # If conversion fails, return False
+            return False
+    
     def _analyze_literature_quality(self, sources: List[Dict], mba_standards: Dict) -> Dict[str, Any]:
         """Analysiert Literaturqualität nach MBA-Standards."""
         total_sources = len(sources)
@@ -1308,8 +1341,8 @@ class MasterarbeitMCPServer:
         
         # Aktualität
         current_year = datetime.now().year
-        recent_sources = sum(1 for s in sources if s.get('year', 0) >= 2020)
-        very_recent = sum(1 for s in sources if s.get('year', 0) >= 2022)
+        recent_sources = sum(1 for s in sources if self._safe_year_compare(s.get('year', 0), 2020))
+        very_recent = sum(1 for s in sources if self._safe_year_compare(s.get('year', 0), 2022))
         
         # Q1-Anteil
         q1_sources = sum(1 for s in sources if s.get('is_q1', False))
@@ -1330,7 +1363,17 @@ class MasterarbeitMCPServer:
         doi_available = sum(1 for s in sources if s.get('doi'))
         
         # Impact Factor Durchschnitt
-        impact_factors = [s.get('impact_factor', 0) for s in sources if s.get('impact_factor', 0) > 0]
+        impact_factors = []
+        for s in sources:
+            impact_value = s.get('impact_factor', 0)
+            try:
+                # Convert to float if string
+                impact_float = float(impact_value) if isinstance(impact_value, str) else impact_value
+                if impact_float > 0:
+                    impact_factors.append(impact_float)
+            except (ValueError, TypeError):
+                # Skip invalid values
+                pass
         avg_impact = sum(impact_factors) / len(impact_factors) if impact_factors else 0
         
         # Bewertung nach MBA-Standards
@@ -1402,7 +1445,19 @@ class MasterarbeitMCPServer:
         
         for criterion, details in eval_criteria.items():
             max_points = details.get("total_points", 0)
+            try:
+                # Ensure max_points is numeric
+                max_points = float(max_points) if isinstance(max_points, str) else max_points
+            except (ValueError, TypeError):
+                max_points = 0
+                
             current_points = current_scores.get(criterion, 0)
+            try:
+                # Ensure current_points is numeric
+                current_points = float(current_points) if isinstance(current_points, str) else current_points
+            except (ValueError, TypeError):
+                current_points = 0
+                
             percentage = (current_points / max_points * 100) if max_points > 0 else 0
             
             analysis[criterion] = {
@@ -1412,7 +1467,16 @@ class MasterarbeitMCPServer:
                 "missing_points": max_points - current_points
             }
         
-        total_current = sum(current_scores.values())
+        # Safely sum current scores, converting strings to numbers
+        total_current = 0
+        for score in current_scores.values():
+            try:
+                score_num = float(score) if isinstance(score, str) else score
+                total_current += score_num
+            except (ValueError, TypeError):
+                # Skip invalid values
+                pass
+                
         total_max = 100
         overall_percentage = (total_current / total_max) * 100
         
@@ -1456,13 +1520,15 @@ class MasterarbeitMCPServer:
                 "current": word_count,
                 "minimum": requirements.get("word_count", {}).get("minimum", 15000),
                 "maximum": requirements.get("word_count", {}).get("maximum", 20000),
-                "status": "OK" if requirements.get("word_count", {}).get("minimum", 0) <= word_count <= requirements.get("word_count", {}).get("maximum", 99999) else "FEHLT"
+                "status": "OK" if (self._safe_numeric_compare(requirements.get("word_count", {}).get("minimum", 0), word_count, "<=") and 
+                                   self._safe_numeric_compare(word_count, requirements.get("word_count", {}).get("maximum", 99999), "<=")) else "FEHLT"
             },
             "page_count": {
                 "current": page_count,
                 "minimum": requirements.get("pages", {}).get("minimum", 60),
                 "maximum": requirements.get("pages", {}).get("maximum", 80),
-                "status": "OK" if requirements.get("pages", {}).get("minimum", 0) <= page_count <= requirements.get("pages", {}).get("maximum", 999) else "FEHLT"
+                "status": "OK" if (self._safe_numeric_compare(requirements.get("pages", {}).get("minimum", 0), page_count, "<=") and 
+                                   self._safe_numeric_compare(page_count, requirements.get("pages", {}).get("maximum", 999), "<=")) else "FEHLT"
             },
             "language": requirements.get("language", "German"),
             "submission_format": requirements.get("submission_format", {})

@@ -1,0 +1,84 @@
+```mermaid
+graph TD
+    A[Research Query] --> B[Parse Keywords]
+    B --> C[Database Selection]
+    
+    C --> D1[Scopus API]
+    C --> D2[Web of Science]
+    C --> D3[ProQuest]
+    C --> D4[ACM Digital Library]
+    
+    D1 --> E1[Scopus Results]
+    D2 --> E2[WoS Results]
+    D3 --> E3[ProQuest Results]
+    D4 --> E4[ACM Results]
+    
+    E1 --> F[Merge & Deduplicate]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+    
+    F --> G[Quality Filtering]
+    
+    G --> G1{Journal Ranking}
+    G1 -->|Q1/A*| G2{Impact Factor}
+    G1 -->|Lower| REJECT1[Reject]
+    
+    G2 -->|≥ 3.0| G3{Publication Year}
+    G2 -->|< 3.0| REJECT2[Reject]
+    
+    G3 -->|2020-2025| G4{Citation Count}
+    G3 -->|Before 2020| REJECT3[Reject]
+    
+    G4 -->|≥ 5| H[Extract Metadata]
+    G4 -->|< 5| REJECT4[Reject]
+    
+    H --> I[Format Citations]
+    I --> J[Generate Bibliography]
+    J --> K[Export Results]
+    
+    K --> L1[BibTeX]
+    K --> L2[RIS]
+    K --> L3[Citavi XML]
+    K --> L4[EndNote]
+    
+    subgraph "Quality Criteria"
+        QC1[Q1 Journals Only]
+        QC2[Impact Factor ≥ 3.0]
+        QC3[Years: 2020-2025]
+        QC4[Min 5 Citations]
+        QC5[Peer Reviewed]
+    end
+    
+    subgraph "Output Formats"
+        OF1[Academic References]
+        OF2[Research Database]
+        OF3[Citation Network]
+        OF4[Quality Report]
+    end
+    
+    G --> QC1
+    G --> QC2
+    G --> QC3
+    G --> QC4
+    G --> QC5
+    
+    L1 --> OF1
+    L2 --> OF2
+    L3 --> OF3
+    L4 --> OF4
+    
+    classDef input fill:#e3f2fd
+    classDef process fill:#e8f5e8
+    classDef decision fill:#fff3e0
+    classDef reject fill:#ffebee
+    classDef output fill:#f1f8e9
+    classDef criteria fill:#fce4ec
+    
+    class A,B input
+    class C,F,G,H,I,J,K process
+    class G1,G2,G3,G4 decision
+    class REJECT1,REJECT2,REJECT3,REJECT4 reject
+    class L1,L2,L3,L4,OF1,OF2,OF3,OF4 output
+    class QC1,QC2,QC3,QC4,QC5 criteria
+```
