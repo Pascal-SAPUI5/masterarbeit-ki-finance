@@ -151,3 +151,4 @@ claude-flow.bat
 claude-flow.ps1
 hive-mind-prompt-*.txt
 indexes/faiss_index
+.claude-flow/metrics/system-metrics.json
