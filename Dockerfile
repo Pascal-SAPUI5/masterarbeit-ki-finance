@@ -6,14 +6,26 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Install aiohttp for HTTP server
-RUN pip install aiohttp
+# Configure pip for better SSL handling and retries
+RUN pip config set global.trusted-host "pypi.org files.pythonhosted.org download.pytorch.org" && \
+    pip config set global.timeout 120 && \
+    pip config set global.retries 5
 
-# Python-Abhängigkeiten
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install aiohttp for HTTP server
+RUN pip install --upgrade pip && \
+    pip install aiohttp
+
+# Python-Abhängigkeiten with retry mechanism
+COPY requirements.txt constraints.txt ./
+# Install PyTorch CPU version first to avoid downloading GPU version
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install torch==2.1.0+cpu torchvision==0.16.0+cpu -f https://download.pytorch.org/whl/torch_stable.html && \
+    pip install --no-cache-dir -c constraints.txt -r requirements.txt || \
+    (sleep 5 && pip install --no-cache-dir -c constraints.txt -r requirements.txt) || \
+    (sleep 10 && pip install --no-cache-dir --index-url https://pypi.org/simple -c constraints.txt -r requirements.txt)
 
 # Anwendungscode
 COPY . .

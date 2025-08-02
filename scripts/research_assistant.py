@@ -139,6 +139,21 @@ class ResearchAssistant:
         
         return progress
     
+    def generate_outline(self) -> Dict[str, Any]:
+        """Generate and return the thesis outline."""
+        # Ensure outline is loaded
+        if not self.thesis_outline:
+            self.thesis_outline = self._load_outline()
+        
+        # Save the outline to disk for reference
+        outline_file = self.project_root / "writing" / "thesis_outline.json"
+        outline_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(outline_file, 'w', encoding='utf-8') as f:
+            json.dump(self.thesis_outline, f, indent=2, ensure_ascii=False)
+        
+        return self.thesis_outline
+    
     def generate_summary(self) -> str:
         """Generate a summary of research progress."""
         progress = self.check_progress()

@@ -1,0 +1,209 @@
+{
+  "env": {
+    "MCP_AUTO_RESEARCH": "true",
+    "MCP_PLACEHOLDER_DETECTION": "true",
+    "MCP_QUALITY_FILTER": "Q1",
+    "MCP_MIN_YEAR": "2020",
+    "MCP_AUTO_IMPROVEMENTS": "true",
+    "MCP_MBA_STANDARDS": "true"
+  },
+  "permissions": {
+    "allow": [
+      "MCP(search_literature)",
+      "MCP(check_progress)",
+      "MCP(create_writing_template)",
+      "MCP(get_context)",
+      "MCP(add_note)",
+      "MCP(manage_references)",
+      "MCP(check_mba_compliance)",
+      "MCP(generate_outline)"
+    ],
+    "deny": [
+      "MCP(delete_*)",
+      "MCP(reset_*)",
+      "MCP(clear_*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "condition": "file.endsWith('.md') || file.endsWith('.tex')",
+        "hooks": [
+          {
+            "type": "mcp",
+            "action": "scan_placeholders",
+            "command": "Scan document for [Research Needed: ...] patterns"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "condition": "file.includes('chapters/') || file.includes('writing/')",
+        "hooks": [
+          {
+            "type": "mcp",
+            "action": "get_context",
+            "params": {
+              "include_rules": true,
+              "include_progress": true
+            }
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "search_literature",
+        "hooks": [
+          {
+            "type": "mcp",
+            "action": "add_note",
+            "template": "Literature search completed: {results_count} sources found for '{keywords}'"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "condition": "placeholders_filled > 0",
+        "hooks": [
+          {
+            "type": "mcp",
+            "action": "add_note",
+            "template": "Filled {placeholders_filled} research placeholders in {file}"
+          },
+          {
+            "type": "mcp",
+            "action": "check_progress",
+            "update": true
+          }
+        ]
+      }
+    ],
+    "OnPlaceholderDetected": [
+      {
+        "pattern": "\\[Research Needed: (.+?)\\]",
+        "hooks": [
+          {
+            "type": "sequence",
+            "actions": [
+              {
+                "extract": "topic",
+                "from": "capture_group_1"
+              },
+              {
+                "tool": "search_literature",
+                "auto_keywords": true,
+                "max_results": 30
+              },
+              {
+                "filter": {
+                  "quartile": ["Q1", "Q2"],
+                  "year": ">=2020",
+                  "citations": ">=10"
+                }
+              },
+              {
+                "replace": {
+                  "format": "academic_citation",
+                  "min_sources": 3,
+                  "max_sources": 8
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "OnDocumentComplete": [
+      {
+        "hooks": [
+          {
+            "type": "mcp",
+            "action": "generate_improvements",
+            "location": "end_of_document",
+            "format": "[Verbesserung: {suggestion}]",
+            "max_suggestions": 5
+          },
+          {
+            "type": "mcp",
+            "action": "check_mba_compliance",
+            "report": true
+          }
+        ]
+      }
+    ]
+  },
+  "research_config": {
+    "auto_mode": {
+      "enabled": true,
+      "trigger_on": ["placeholder_detection", "explicit_request"],
+      "batch_placeholders": true
+    },
+    "quality_filters": {
+      "preferred_quartiles": ["Q1"],
+      "acceptable_quartiles": ["Q2"],
+      "min_citations": 10,
+      "preferred_years": [2023, 2024, 2022, 2021, 2020],
+      "exclude_preprints": true
+    },
+    "search_strategy": {
+      "initial_keywords": "extract_from_context",
+      "expand_with": ["synonyms", "related_terms"],
+      "languages": ["en", "de"],
+      "databases": ["scholar", "semantic_scholar", "crossref"]
+    },
+    "citation_format": {
+      "style": "APA",
+      "in_text": "{authors} ({year})",
+      "reference_list": "auto_generate"
+    }
+  },
+  "improvement_suggestions": {
+    "enabled": true,
+    "categories": [
+      "methodology",
+      "literature_gaps",
+      "additional_perspectives",
+      "practical_implications",
+      "future_research"
+    ],
+    "format": "[Verbesserung: {category} - {suggestion}]",
+    "location": "document_end",
+    "max_per_category": 2
+  },
+  "progress_tracking": {
+    "auto_update": true,
+    "track_metrics": [
+      "placeholders_filled",
+      "sources_integrated",
+      "chapters_completed",
+      "compliance_score"
+    ],
+    "report_frequency": "on_significant_change"
+  },
+  "mba_compliance": {
+    "enforce": true,
+    "criteria": {
+      "wissenschaftlichkeit": {
+        "check": "peer_reviewed_only",
+        "weight": 0.3
+      },
+      "aktualität": {
+        "check": "recent_sources_ratio",
+        "threshold": 0.7,
+        "weight": 0.2
+      },
+      "praxisrelevanz": {
+        "check": "practice_theory_balance",
+        "ratio": "40:60",
+        "weight": 0.25
+      },
+      "kritische_reflexion": {
+        "check": "argument_balance",
+        "weight": 0.25
+      }
+    }
+  },
+  "includeInstructions": "Always scan for [Research Needed] placeholders and offer to fill them with high-quality academic sources. Append [Verbesserung] suggestions at document end."
+}

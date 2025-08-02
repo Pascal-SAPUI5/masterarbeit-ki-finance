@@ -1,4 +1,4 @@
-# Methodik - Forschungsdesign
+# Introduction - Research Question
 
 ## Einleitung des Abschnitts
 [Kurze Einführung in das Thema dieses Abschnitts - 2-3 Sätze]

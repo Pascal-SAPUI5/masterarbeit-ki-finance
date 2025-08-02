@@ -24,14 +24,10 @@ class ClaudeMCPServer(MasterarbeitMCPServer):
         """Handle the initialize method according to MCP protocol."""
         return {
             "protocolVersion": "2025-06-18",
-            "capabilities": {
-                "tools": True,
-                "resources": True,
-                "prompts": True
-            },
+            "capabilities": {},
             "serverInfo": {
                 "name": "masterarbeit-ki-finance",
-                "version": "1.0.0"
+                "version": "0.1.0"
             }
         }
     
@@ -50,6 +46,9 @@ class ClaudeMCPServer(MasterarbeitMCPServer):
             return await self.initialize(params)
         elif method == "shutdown":
             return await self.shutdown(params)
+        elif method == "notifications/initialized":
+            # This is a notification, just acknowledge it
+            return {}
         else:
             # Delegate to parent class for all other methods
             return await super().handle_request(request)
@@ -64,6 +63,16 @@ class ClaudeMCPServer(MasterarbeitMCPServer):
             params = request.get("params", {})
             request_id = request.get("id")
             
+            # Check if this is a notification (no id field)
+            # Notifications should not receive a response
+            is_notification = "id" not in request
+            
+            # Special handling for notifications
+            if is_notification and method.startswith("notifications/"):
+                # Process the notification but don't return a response
+                # For now, we just acknowledge it internally
+                return ""  # No response for notifications
+            
             # Map to internal format
             internal_request = {
                 "method": method,
@@ -73,7 +82,11 @@ class ClaudeMCPServer(MasterarbeitMCPServer):
             # Handle request
             result = await self.handle_request(internal_request)
             
-            # Format response
+            # Don't send response for notifications
+            if is_notification:
+                return ""
+            
+            # Format response according to JSON-RPC 2.0 spec
             if "error" in result:
                 response = {
                     "jsonrpc": "2.0",
@@ -84,11 +97,27 @@ class ClaudeMCPServer(MasterarbeitMCPServer):
                     "id": request_id
                 }
             else:
-                response = {
-                    "jsonrpc": "2.0",
-                    "result": result,
-                    "id": request_id
-                }
+                # For tools/call, wrap the result properly
+                if method == "tools/call":
+                    response = {
+                        "jsonrpc": "2.0",
+                        "result": {
+                            "content": [
+                                {
+                                    "type": "text", 
+                                    "text": json.dumps(result, indent=2, ensure_ascii=False)
+                                }
+                            ]
+                        },
+                        "id": request_id
+                    }
+                else:
+                    # For other methods (list_tools, etc.), return result directly
+                    response = {
+                        "jsonrpc": "2.0",
+                        "result": result,
+                        "id": request_id
+                    }
             
             return json.dumps(response)
             
@@ -117,28 +146,17 @@ class ClaudeMCPServer(MasterarbeitMCPServer):
 
 async def main():
     """Main function for Claude Code MCP Server."""
+    # Redirect stderr to prevent ML model loading messages from interfering
+    import os
+    import logging
+    
+    # Disable HuggingFace warnings
+    os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = 'true'
+    logging.getLogger("sentence_transformers").setLevel(logging.ERROR)
+    
     server = ClaudeMCPServer()
     
-    # Send initialization response
-    init_response = {
-        "jsonrpc": "2.0",
-        "result": {
-            "protocolVersion": "2025-06-18",
-            "capabilities": {
-                "tools": True,
-                "resources": True,
-                "prompts": True
-            },
-            "serverInfo": {
-                "name": "masterarbeit-ki-finance",
-                "version": "1.0.0"
-            }
-        },
-        "id": "init"
-    }
-    print(json.dumps(init_response))
-    sys.stdout.flush()
-    
+    # Don't send initialization response automatically - wait for request
     # Process requests
     while True:
         try:
@@ -147,8 +165,10 @@ async def main():
                 break
             
             response = await server.handle_json_rpc(line.strip())
-            print(response)
-            sys.stdout.flush()
+            # Only print non-empty responses (notifications don't get responses)
+            if response:
+                print(response)
+                sys.stdout.flush()
             
         except KeyboardInterrupt:
             break

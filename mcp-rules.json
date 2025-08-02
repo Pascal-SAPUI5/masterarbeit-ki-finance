@@ -1,0 +1,215 @@
+{
+  "mcp_tools": {
+    "available_tools": {
+      "search_literature": {
+        "description": "Sucht wissenschaftliche Literatur in Q1-Journals",
+        "parameters": {
+          "keywords": "array<string>",
+          "max_results": "integer (default: 50)"
+        }
+      },
+      "check_progress": {
+        "description": "Zeigt aktuellen Fortschritt der Masterarbeit",
+        "returns": "chapters, sections, completion_status"
+      },
+      "create_writing_template": {
+        "description": "Erstellt Schreibvorlagen für Kapitel/Abschnitte",
+        "parameters": {
+          "chapter": "string",
+          "section": "string"
+        }
+      },
+      "get_context": {
+        "description": "Liefert Projektkontext und MBA-Standards",
+        "parameters": {
+          "include_rules": "boolean",
+          "include_progress": "boolean"
+        }
+      },
+      "add_note": {
+        "description": "Speichert Notizen und Erkenntnisse",
+        "parameters": {
+          "note": "string",
+          "category": "string"
+        }
+      }
+    }
+  },
+  "research_patterns": {
+    "detection": [
+      "[Research Needed: ...]",
+      "[Literatur erforderlich: ...]",
+      "[TODO: Research ...]",
+      "[Quelle benötigt: ...]"
+    ],
+    "replacement_workflow": {
+      "step1_identify": "Extract topic X from [Research Needed: X]",
+      "step2_keywords": "Determine relevant keywords from topic",
+      "step3_search": "Execute search_literature with keywords",
+      "step4_filter": {
+        "quartile": "Q1 preferred",
+        "year": ">=2020",
+        "citations": ">=10"
+      },
+      "step5_replace": "Replace placeholder with formatted citations and summary"
+    }
+  },
+  "formatting_rules": {
+    "citation_style": {
+      "in_text": "Autor et al. (Jahr)",
+      "reference": "(Autor et al., Jahr)"
+    },
+    "source_integration": {
+      "min_sources_per_placeholder": 3,
+      "max_sources_per_placeholder": 10,
+      "preferred_sources": ["Q1 journals", "2020-2024", "peer-reviewed"]
+    },
+    "improvement_suggestions": {
+      "format": "[Verbesserung: ...]",
+      "location": "end_of_document",
+      "examples": [
+        "[Verbesserung: Erwägen Sie die Integration von Blockchain-spezifischen KI-Agenten]",
+        "[Verbesserung: Die Methodik könnte durch Mixed-Methods-Design gestärkt werden]"
+      ]
+    }
+  },
+  "workflow_automation": {
+    "on_document_open": [
+      {
+        "action": "get_context",
+        "params": {
+          "include_rules": true,
+          "include_progress": true
+        }
+      },
+      {
+        "action": "scan_for_placeholders",
+        "patterns": "research_patterns.detection"
+      }
+    ],
+    "on_placeholder_found": [
+      {
+        "action": "extract_keywords",
+        "from": "placeholder_text"
+      },
+      {
+        "action": "search_literature",
+        "with": "extracted_keywords",
+        "max_results": 30
+      },
+      {
+        "action": "filter_results",
+        "criteria": "research_patterns.replacement_workflow.step4_filter"
+      },
+      {
+        "action": "replace_placeholder",
+        "with": "filtered_results"
+      },
+      {
+        "action": "add_note",
+        "params": {
+          "note": "Replaced placeholder with X sources",
+          "category": "progress"
+        }
+      }
+    ],
+    "on_chapter_complete": [
+      {
+        "action": "generate_improvements",
+        "format": "formatting_rules.improvement_suggestions"
+      }
+    ]
+  },
+  "quality_metrics": {
+    "quantitative": {
+      "placeholder_fill_rate": ">=80%",
+      "q1_sources_per_placeholder": "avg 5",
+      "source_recency": "90% from 2020-2024"
+    },
+    "qualitative": {
+      "thematic_coherence": true,
+      "argumentative_stringency": true,
+      "academic_rigor": true
+    }
+  },
+  "chapter_specific_rules": {
+    "theoretical_chapters": {
+      "applies_to": ["2", "3"],
+      "focus": ["foundational_works", "reviews", "definitions"],
+      "source_balance": "classics_and_current"
+    },
+    "practical_chapters": {
+      "applies_to": ["5", "6"],
+      "focus": ["case_studies", "implementations", "industry_reports"],
+      "additional_sources": ["whitepapers", "technical_reports"]
+    },
+    "methodology_chapter": {
+      "applies_to": ["4"],
+      "focus": ["methodological_standards", "comparable_studies", "validation"]
+    }
+  },
+  "mba_standards": {
+    "wissenschaftlichkeit": "only peer-reviewed sources",
+    "aktualität": "prefer newest research",
+    "praxisrelevanz": "balance theory and practice",
+    "kritische_reflexion": "include pro/contra arguments"
+  },
+  "example_execution": {
+    "trigger": "User: 'Bitte fülle die Research-Platzhalter in Kapitel 2.1'",
+    "steps": [
+      {
+        "tool": "get_context",
+        "purpose": "Understand project state"
+      },
+      {
+        "tool": "create_writing_template",
+        "params": {"chapter": "2", "section": "2.1"}
+      },
+      {
+        "action": "identify",
+        "found": "[Research Needed: KI-Agent Definitionen]"
+      },
+      {
+        "tool": "search_literature",
+        "params": {
+          "keywords": ["AI agents", "definition", "autonomous systems"]
+        }
+      },
+      {
+        "action": "integrate",
+        "result": "Nach Wooldridge (2022) sind KI-Agenten..."
+      },
+      {
+        "tool": "add_note",
+        "params": {
+          "note": "5 Q1-Quellen für KI-Agent Definitionen integriert",
+          "category": "progress"
+        }
+      },
+      {
+        "action": "suggest",
+        "result": "[Verbesserung: Erwägen Sie die Ergänzung um Multi-Agent-System Definitionen]"
+      }
+    ]
+  },
+  "error_handling": {
+    "no_results_found": {
+      "action": "broaden_keywords",
+      "fallback": "search_related_terms"
+    },
+    "insufficient_q1_sources": {
+      "action": "include_q2_sources",
+      "max_q2_percentage": 30
+    },
+    "outdated_sources_only": {
+      "action": "note_research_gap",
+      "format": "[Research Gap: Aktuelle Forschung zu X fehlt]"
+    }
+  },
+  "performance_optimization": {
+    "batch_operations": true,
+    "cache_search_results": true,
+    "reuse_common_searches": true,
+    "parallel_placeholder_processing": false
+  }
+}

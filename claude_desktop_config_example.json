@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "masterarbeit-ki-finance": {
+      "command": "wsl.exe",
+      "args": [
+        "bash",
+        "-c",
+        "cd /home/a503038/Projects/masterarbeit-ki-finance && python mcp_server_http.py"
+      ]
+    }
+  }
+}

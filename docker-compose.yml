@@ -54,6 +54,7 @@ services:
       - ./scripts:/app/scripts
       - ./mcp_server.py:/app/mcp_server.py
       - ./mcp_server_claude.py:/app/mcp_server_claude.py
+      - ./mcp_server_http.py:/app/mcp_server_http.py
       - ./memory_system.py:/app/memory_system.py
       
     environment:

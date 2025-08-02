@@ -44,19 +44,55 @@ class MCPHTTPServer:
             
             # Process through MCP server
             response_str = await self.mcp_server.handle_json_rpc(json.dumps(data))
-            response = json.loads(response_str)
             
-            return web.json_response(response)
+            # Check if response is empty (for notifications)
+            if not response_str or response_str.strip() == '':
+                # For notifications (no id), don't return a response
+                if "id" not in data:
+                    return web.Response(status=204)
+                # For regular requests with empty response
+                return web.json_response({
+                    "jsonrpc": "2.0",
+                    "result": None,
+                    "id": data.get("id")
+                })
+            
+            try:
+                response = json.loads(response_str)
+                return web.json_response(response)
+            except json.JSONDecodeError as e:
+                logger.warning(f"Failed to parse JSON response: {e}, response was: {response_str}")
+                # Return proper error structure instead of 204
+                return web.json_response({
+                    "jsonrpc": "2.0",
+                    "error": {
+                        "code": -32603,
+                        "message": f"Response parsing error: {str(e)}"
+                    },
+                    "id": data.get("id")
+                }, status=500)
             
         except Exception as e:
             logger.error(f"Error handling request: {str(e)}")
+            logger.error(f"Request data was: {data}")
+            # Check if this was a notification (no id field)
+            if "id" not in data:
+                # For notifications that errored, return proper error structure
+                return web.json_response({
+                    "jsonrpc": "2.0",
+                    "error": {
+                        "code": -32603,
+                        "message": f"Notification processing error: {str(e)}"
+                    },
+                    "id": data.get("id", 1)
+                }, status=500)
             return web.json_response({
                 "jsonrpc": "2.0",
                 "error": {
                     "code": -32603,
                     "message": f"Internal error: {str(e)}"
                 },
-                "id": None
+                "id": data.get("id")
             }, status=500)
     
     async def capabilities(self, request):
@@ -65,14 +101,10 @@ class MCPHTTPServer:
             "jsonrpc": "2.0",
             "result": {
                 "protocolVersion": "2025-06-18",
-                "capabilities": {
-                    "tools": True,
-                    "resources": True,
-                    "prompts": True
-                },
+                "capabilities": {},
                 "serverInfo": {
                     "name": "masterarbeit-ki-finance",
-                    "version": "1.0.0"
+                    "version": "0.1.0"
                 }
             },
             "id": "capabilities"

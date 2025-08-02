@@ -6,22 +6,34 @@ Integrates with Scopus, Web of Science, and other databases
 import json
 import argparse
 import os
+import sys
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 import requests
 import logging
 from dotenv import load_dotenv
+
+# Add the parent directory to sys.path to enable imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from scripts.utils import get_project_root, load_config, save_json, get_timestamp
 
 # Load environment variables
 load_dotenv()
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
 class LiteratureSearcher:
     def __init__(self):
         self.project_root = get_project_root()
         self.config = load_config("research-criteria.yaml")
         self.api_keys = self._load_api_keys()
+        self.results = []
+        self.validated_results = []
         
     def _load_api_keys(self) -> Dict[str, str]:
         """Load API keys from environment variables and config file."""
@@ -93,8 +105,18 @@ class LiteratureSearcher:
                 results.extend(self._search_wos(query, years))
         
         # Filter by quality
-        if quality == "q1":
-            results = [r for r in results if r.get("quartile") == "Q1" or r.get("impact_factor", 0) > 3.0]
+        if quality and quality.lower() != "all":
+            if quality.lower() == "q1":
+                # For Q1, we want high-quality papers - either Q1 quartile, high citations, or high impact factor
+                results = [r for r in results if 
+                          r.get("quartile") == "Q1" or 
+                          r.get("impact_factor", 0) > 3.0 or
+                          r.get("citations", 0) > 50]
+            elif quality.lower() == "q2":
+                results = [r for r in results if 
+                          r.get("quartile") in ["Q1", "Q2"] or 
+                          r.get("impact_factor", 0) > 2.0 or
+                          r.get("citations", 0) > 20]
         
         # Save results
         timestamp = get_timestamp()
@@ -163,6 +185,7 @@ class LiteratureSearcher:
         """Search Google Scholar using scholarly package."""
         try:
             from scholarly import scholarly
+            import time
             
             results = []
             start_year, end_year = years.split("-") if "-" in years else (years, years)
@@ -176,6 +199,10 @@ class LiteratureSearcher:
             for i, article in enumerate(search_query):
                 if i >= 20:  # Limit to 20 results
                     break
+                
+                # Add small delay to avoid rate limiting
+                if i > 0 and i % 5 == 0:
+                    time.sleep(1)
                     
                 try:
                     # Extract publication info
@@ -214,12 +241,28 @@ class LiteratureSearcher:
                     }
                     
                     # Estimate quality based on citations and venue
-                    if result["citations"] > 50:
+                    # High-impact journals often mentioned in venue
+                    high_impact_keywords = ["Nature", "Science", "Cell", "PNAS", "IEEE", "ACM", 
+                                          "Journal of Finance", "Review of Financial Studies", 
+                                          "Financial Management", "Artificial Intelligence"]
+                    venue_lower = result["journal"].lower()
+                    
+                    # More nuanced quality estimation
+                    if result["citations"] > 100 or any(keyword.lower() in venue_lower for keyword in high_impact_keywords[:4]):
                         result["quartile"] = "Q1"
+                        result["impact_factor"] = 5.0  # Estimated
+                    elif result["citations"] > 50 or any(keyword.lower() in venue_lower for keyword in high_impact_keywords[4:]):
+                        result["quartile"] = "Q1"
+                        result["impact_factor"] = 3.5  # Estimated
                     elif result["citations"] > 20:
                         result["quartile"] = "Q2"
-                    else:
+                        result["impact_factor"] = 2.0  # Estimated
+                    elif result["citations"] > 5:
                         result["quartile"] = "Q3"
+                        result["impact_factor"] = 1.0  # Estimated
+                    else:
+                        result["quartile"] = "Q4"
+                        result["impact_factor"] = 0.5  # Estimated
                     
                     results.append(result)
                     
@@ -227,10 +270,16 @@ class LiteratureSearcher:
                     logging.warning(f"Error parsing Google Scholar result: {e}")
                     continue
                     
+            logging.info(f"Google Scholar search found {len(results)} results for query: {query}")
             return results
             
+        except ImportError as e:
+            logging.error(f"Google Scholar module not available: {e}")
+            logging.info("Install with: pip install scholarly")
+            return []
         except Exception as e:
             logging.error(f"Google Scholar search error: {e}")
+            logging.info("Falling back to empty results")
             return []
     
     def _search_crossref(self, query: str, years: str) -> List[Dict[str, Any]]:
@@ -343,6 +392,85 @@ class LiteratureSearcher:
             logging.error(f"arXiv search error: {e}")
             return []
     
+    def validate_source(self, source: Dict[str, Any]) -> Tuple[bool, str]:
+        """Validate if a source meets quality criteria.
+        
+        Args:
+            source: Source dictionary with paper metadata
+            
+        Returns:
+            Tuple of (is_valid, reason)
+        """
+        # Check for required fields
+        required_fields = ["title", "authors", "year"]
+        for field in required_fields:
+            if not source.get(field):
+                return False, f"Missing required field: {field}"
+        
+        # Check year
+        try:
+            year = int(source.get("year", 0))
+            if year < 2020:
+                return False, f"Publication year {year} is too old (minimum: 2020)"
+        except ValueError:
+            return False, "Invalid year format"
+        
+        # Check quartile/quality
+        quartile = source.get("quartile", "").upper()
+        impact_factor = source.get("impact_factor", 0)
+        citations = source.get("citations", 0)
+        
+        # Q1 sources are always valid
+        if quartile == "Q1":
+            return True, "Q1 journal"
+        
+        # High impact factor sources are valid
+        if impact_factor >= 3.0:
+            return True, f"High impact factor: {impact_factor}"
+        
+        # Highly cited sources are valid
+        if citations >= 50:
+            return True, f"Highly cited: {citations} citations"
+        
+        # Preprints need special consideration
+        if quartile == "PREPRINT":
+            if citations >= 10:
+                return True, f"Well-cited preprint: {citations} citations"
+            else:
+                return False, "Preprint with insufficient citations"
+        
+        # Default: not validated
+        return False, "Does not meet quality criteria (Q1, high IF, or high citations)"
+    
+    def save_results(self):
+        """Save search results to file."""
+        if not self.results:
+            return
+        
+        timestamp = get_timestamp()
+        
+        # Save all results
+        all_results_file = self.project_root / "research" / "search-results" / f"all_results_{timestamp}.json"
+        save_json({
+            "timestamp": timestamp,
+            "total_found": len(self.results),
+            "results": self.results
+        }, all_results_file)
+        
+        # Save validated results separately
+        if self.validated_results:
+            validated_file = self.project_root / "research" / "validated-literature.json"
+            save_json(self.validated_results, validated_file)
+            
+        return all_results_file
+    
+    def search_google_scholar(self, query: str, max_results: int = 50) -> List[Dict[str, Any]]:
+        """Public wrapper for Google Scholar search."""
+        return self._search_google_scholar(query, "2020-2025")[:max_results]
+    
+    def search_crossref(self, query: str, max_results: int = 50) -> List[Dict[str, Any]]:
+        """Public wrapper for Crossref search."""
+        return self._search_crossref(query, "2020-2025")[:max_results]
     
 
 def main():

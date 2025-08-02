@@ -154,6 +154,191 @@ class CitationQualityControl:
         
         return reference
     
+    def analyze_text_citations(self, text: str) -> Dict[str, any]:
+        """Analyze text for citation opportunities and quality."""
+        analysis = {
+            "total_citations": 0,
+            "missing_citations": [],
+            "suggestions": {},
+            "quality_score": 0,
+            "research_needed_count": 0
+        }
+        
+        # Find existing citations
+        citation_patterns = [
+            r'\(([A-Za-z\s&]+,\s*\d{4})\)',  # (Author, 2020)
+            r'\(([A-Za-z\s]+et al\.,\s*\d{4})\)',  # (Author et al., 2020)
+            r'([A-Za-z\s&]+)\s*\((\d{4})\)',  # Author (2020)
+        ]
+        
+        existing_citations = []
+        for pattern in citation_patterns:
+            existing_citations.extend(re.findall(pattern, text))
+        
+        analysis["total_citations"] = len(existing_citations)
+        
+        # Count [Research Needed] markers
+        research_needed_markers = re.findall(r'\[Research Needed[:\s]*([^\]]*)\]', text)
+        analysis["research_needed_count"] = len(research_needed_markers)
+        
+        # Identify sentences that might need citations
+        sentences = re.split(r'[.!?]+', text)
+        
+        # Keywords that typically require citations
+        citation_keywords = [
+            "studies show", "research indicates", "according to", "has been shown",
+            "demonstrated that", "evidence suggests", "findings reveal", "analysis shows",
+            "previous work", "literature review", "systematic review", "meta-analysis",
+            "empirical evidence", "theoretical framework", "conceptual model"
+        ]
+        
+        for sentence in sentences:
+            sentence_lower = sentence.lower().strip()
+            if not sentence_lower:
+                continue
+                
+            # Check if sentence needs citation
+            needs_citation = False
+            for keyword in citation_keywords:
+                if keyword in sentence_lower:
+                    needs_citation = True
+                    break
+            
+            # Check if sentence already has citation
+            has_citation = False
+            for pattern in citation_patterns:
+                if re.search(pattern, sentence):
+                    has_citation = True
+                    break
+            
+            if needs_citation and not has_citation:
+                analysis["missing_citations"].append(sentence.strip())
+        
+        # Generate citation suggestions based on content topics
+        topics = self._extract_topics(text)
+        
+        for topic in topics:
+            # Find relevant references from our database
+            relevant_refs = self._find_relevant_references(topic)
+            if relevant_refs:
+                analysis["suggestions"][topic] = {
+                    "sources": relevant_refs[:5],  # Top 5 relevant sources
+                    "citation_format": self._format_suggestions(relevant_refs[:3])
+                }
+        
+        # Calculate quality score
+        total_sentences = len([s for s in sentences if s.strip()])
+        if total_sentences > 0:
+            citation_density = analysis["total_citations"] / total_sentences
+            missing_ratio = len(analysis["missing_citations"]) / total_sentences
+            
+            # Score based on citation density and missing citations
+            analysis["quality_score"] = max(0, min(100, 
+                int(100 * citation_density * 2 - missing_ratio * 50)))
+        
+        return analysis
+    
+    def _extract_topics(self, text: str) -> List[str]:
+        """Extract main topics from text for citation suggestions."""
+        topics = []
+        
+        # Common research topics in the field
+        topic_keywords = {
+            "AI agents": ["AI agent", "artificial intelligence agent", "intelligent agent"],
+            "financial services": ["finance", "banking", "financial sector", "fintech"],
+            "process automation": ["automation", "RPA", "process optimization"],
+            "knowledge management": ["knowledge", "information management", "data governance"],
+            "SAP BTP": ["SAP", "BTP", "business technology platform"],
+            "systematic review": ["PRISMA", "systematic literature", "meta-analysis"]
+        }
+        
+        text_lower = text.lower()
+        for topic, keywords in topic_keywords.items():
+            if any(keyword.lower() in text_lower for keyword in keywords):
+                topics.append(topic)
+        
+        return topics
+    
+    def _find_relevant_references(self, topic: str) -> List[Dict]:
+        """Find references relevant to a topic."""
+        relevant = []
+        
+        for ref in self.references:
+            # Check title and abstract for topic relevance
+            title = ref.get("title", "").lower()
+            abstract = ref.get("abstract", "").lower()
+            
+            if topic.lower() in title or topic.lower() in abstract:
+                relevant.append(ref)
+        
+        # Sort by quality (Q1 first) and year (newest first)
+        relevant.sort(key=lambda x: (
+            x.get("quartile") != "Q1",
+            -int(x.get("year", 0))
+        ))
+        
+        return relevant
+    
+    def _format_suggestions(self, refs: List[Dict]) -> List[str]:
+        """Format citation suggestions."""
+        suggestions = []
+        
+        for ref in refs:
+            authors = ref.get("authors", [])
+            year = ref.get("year", "n.d.")
+            
+            if len(authors) == 1:
+                citation = f"({authors[0].split(',')[0]}, {year})"
+            elif len(authors) == 2:
+                author1 = authors[0].split(',')[0]
+                author2 = authors[1].split(',')[0]
+                citation = f"({author1} & {author2}, {year})"
+            else:
+                citation = f"({authors[0].split(',')[0]} et al., {year})"
+            
+            suggestions.append(citation)
+        
+        return suggestions
+    
+    def generate_quality_report(self, analysis: Dict[str, any]) -> str:
+        """Generate a citation quality report."""
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        report_path = self.project_root / "output" / f"citation_report_{timestamp}.md"
+        
+        report = f"""# Citation Quality Report
+Generated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+
+## Summary
+- Total Citations: {analysis['total_citations']}
+- Quality Score: {analysis['quality_score']}/100
+- Missing Citations: {len(analysis['missing_citations'])}
+
+## Missing Citations
+The following sentences appear to need citations:
+
+"""
+        
+        for i, sentence in enumerate(analysis['missing_citations'], 1):
+            report += f"{i}. {sentence}\n\n"
+        
+        if analysis['suggestions']:
+            report += "\n## Citation Suggestions by Topic\n\n"
+            
+            for topic, data in analysis['suggestions'].items():
+                report += f"### {topic}\n"
+                report += "Suggested citations:\n"
+                for citation in data['citation_format']:
+                    report += f"- {citation}\n"
+                report += "\n"
+        
+        # Save report
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(report_path, 'w', encoding='utf-8') as f:
+            f.write(report)
+        
+        return str(report_path)
+    
     def check_document_citations(self, file_path: str) -> Dict[str, any]:
         """Check all citations in a document."""
         path = Path(file_path)
