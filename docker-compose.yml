@@ -68,7 +68,7 @@ services:
       - RESEARCH_ENV=production
       # Browser Configuration
       - DISPLAY=:99
-      - CHROME_BIN=/usr/bin/chromium-browser
+      - CHROME_BIN=/usr/bin/chromium
       - CHROMIUM_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu --headless --remote-debugging-port=9222"
       - SELENIUM_HUB_HOST=localhost
       - SELENIUM_HUB_PORT=4444

@@ -182,9 +182,9 @@ class DockerBrowserTestSuite:
         try:
             chrome_bin = os.getenv('CHROME_BIN', '/usr/bin/chromium')
             
-            # Test chrome executable
+            # Test chrome executable with --no-sandbox for root user
             result = subprocess.run(
-                [chrome_bin, '--headless', '--disable-gpu', '--dump-dom', 'data:text/html,<html><body>Test</body></html>'],
+                [chrome_bin, '--headless', '--no-sandbox', '--disable-gpu', '--dump-dom', 'data:text/html,<html><body>Test</body></html>'],
                 capture_output=True, text=True, timeout=15
             )
             
@@ -300,14 +300,14 @@ class DockerBrowserTestSuite:
             config = DockerBrowserConfig()
             
             with BrowserContextManager(config) as driver:
-                # Navigate to a test page
-                driver.get('data:text/html,<html><body>Cookie Test</body></html>')
+                # Navigate to a real domain to avoid cookie domain issues
+                driver.get('https://httpbin.org/html')
                 
-                # Add a test cookie
+                # Add a test cookie with proper domain
                 driver.add_cookie({
                     'name': 'test_cookie',
                     'value': 'test_value',
-                    'domain': 'localhost'
+                    'domain': '.httpbin.org'
                 })
                 
                 # Get cookies
