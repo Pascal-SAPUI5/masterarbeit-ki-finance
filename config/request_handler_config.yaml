@@ -1,0 +1,102 @@
+# Request Handler Configuration
+# Intelligent throttling, session management, and proxy settings
+
+rate_limiting:
+  strategies:
+    conservative:
+      initial_delay: 10.0          # Start with 10 seconds between requests
+      success_reduction: 0.8       # Reduce delay by 20% after success streak
+      failure_increase: 2.0        # Double delay on failures
+      min_delay: 5.0              # Minimum delay (matches requirement)
+      max_delay: 60.0             # Maximum delay for safety
+      success_streak_threshold: 10 # Reduce delay after 10 successes
+      
+    balanced:
+      initial_delay: 7.0
+      success_reduction: 0.9
+      failure_increase: 1.5
+      min_delay: 3.0
+      max_delay: 45.0
+      success_streak_threshold: 8
+      
+    aggressive:
+      initial_delay: 5.0
+      success_reduction: 0.95
+      failure_increase: 1.2
+      min_delay: 2.0
+      max_delay: 30.0
+      success_streak_threshold: 5
+
+randomization:
+  enabled: true
+  min_interval: 5.0               # Minimum random interval (requirement)
+  max_interval: 15.0              # Maximum random interval (requirement)
+  base_variance: 0.2              # ±20% variance from base delay
+
+captcha_handling:
+  pause_duration: 30.0            # 30 second pause on CAPTCHA (requirement)
+  detection_patterns:
+    - "captcha"
+    - "recaptcha" 
+    - "hcaptcha"
+    - "security check"
+    - "verify you are human"
+    - "unusual traffic"
+    - "suspicious activity"
+
+session_management:
+  cookie_persistence: true
+  session_timeout: 3600           # 1 hour session timeout
+  auto_save_interval: 300         # Save sessions every 5 minutes
+  max_sessions: 10                # Maximum concurrent sessions
+  
+user_agents:
+  - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  - "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
+
+proxy_rotation:
+  enabled: false                  # Set to true when proxies are available
+  rotation_strategy: "round_robin"
+  health_check_interval: 300      # Test proxies every 5 minutes
+  failure_threshold: 3            # Mark as failed after 3 failures
+  
+# Example proxy configuration (uncomment and configure as needed)
+# proxies:
+#   - host: "proxy1.example.com"
+#     port: 8080
+#     protocol: "http"
+#     username: null
+#     password: null
+#   - host: "proxy2.example.com"
+#     port: 8080
+#     protocol: "http"
+#     username: null
+#     password: null
+
+request_timeouts:
+  total: 30                       # Total request timeout (seconds)
+  connect: 10                     # Connection timeout (seconds)
+  
+error_handling:
+  max_retries: 3                  # Maximum retries per request
+  retry_delay: 5.0                # Base delay between retries
+  exponential_backoff: true       # Use exponential backoff for retries
+  
+logging:
+  level: "INFO"
+  log_requests: true
+  log_responses: false            # Set to true for debugging
+  log_file: ".request_handler/requests.log"
+
+performance:
+  max_concurrent_requests: 3      # Maximum concurrent requests
+  connection_pool_size: 10        # HTTP connection pool size
+  keep_alive_timeout: 30          # Keep-alive timeout
+  
+statistics:
+  enabled: true
+  save_interval: 600              # Save stats every 10 minutes
+  history_limit: 1000             # Keep last 1000 requests in memory
+  export_format: "json"           # json, csv, or both

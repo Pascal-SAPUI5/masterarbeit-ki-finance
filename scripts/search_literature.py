@@ -182,16 +182,60 @@ class LiteratureSearcher:
         return []
     
     def _search_google_scholar(self, query: str, years: str) -> List[Dict[str, Any]]:
-        """Search Google Scholar using scholarly package."""
+        """Search Google Scholar using browser automation with CAPTCHA detection."""
         try:
-            from scholarly import scholarly
+            # Try browser automation first (more reliable)
+            from scripts.browser_automation import ScholarlyBrowserIntegration
+            
+            start_year, end_year = years.split("-") if "-" in years else (years, years)
+            year_query = f'{query} after:{start_year} before:{end_year}'
+            
+            logging.info(f"Google Scholar browser search: {year_query}")
+            
+            with ScholarlyBrowserIntegration() as browser_scholar:
+                results = browser_scholar.search_pubs(year_query, max_results=20)
+                
+                # Filter by year range
+                filtered_results = []
+                for result in results:
+                    try:
+                        if result.get('year'):
+                            year_int = int(result['year'])
+                            if int(start_year) <= year_int <= int(end_year):
+                                filtered_results.append(result)
+                    except (ValueError, TypeError):
+                        # Include results without valid years
+                        filtered_results.append(result)
+                
+                logging.info(f"Google Scholar browser search found {len(filtered_results)} results")
+                return filtered_results
+                
+        except ImportError as e:
+            logging.warning(f"Browser automation not available: {e}")
+        except Exception as e:
+            logging.warning(f"Browser automation failed: {e}, falling back to scholarly")
+        
+        # Fallback to original scholarly implementation
+        try:
+            from scholarly import scholarly, ProxyGenerator
             import time
+            
+            # Try to use free proxy to avoid blocks
+            try:
+                pg = ProxyGenerator()
+                pg.FreeProxies()
+                scholarly.use_proxy(pg)
+                logging.info("Using proxy for Google Scholar")
+            except Exception as e:
+                logging.warning(f"Could not set up proxy: {e}")
             
             results = []
             start_year, end_year = years.split("-") if "-" in years else (years, years)
             
             # Add year filter to query
             year_query = f'{query} after:{start_year} before:{end_year}'
+            
+            logging.info(f"Google Scholar search: {year_query}")
             
             # Search and limit results
             search_query = scholarly.search_pubs(year_query)

@@ -1,0 +1,22 @@
+# Requirements for Intelligent Request Handler
+# Core request handling
+aiohttp>=3.8.0
+aiofiles>=0.8.0
+
+# HTML parsing for enhanced search
+beautifulsoup4>=4.10.0
+lxml>=4.6.0
+
+# Existing requirements that may be needed
+requests>=2.25.0
+pyyaml>=6.0
+
+# Optional: Enhanced proxy support
+aiohttp-socks>=0.6.0
+
+# Optional: Advanced rate limiting
+ratelimit>=2.2.0
+
+# For testing
+pytest>=6.0.0
+pytest-asyncio>=0.18.0

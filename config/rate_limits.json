@@ -1,0 +1,65 @@
+{
+  "google_scholar": {
+    "requests_per_minute": 8,
+    "requests_per_hour": 200,
+    "daily_limit": 500,
+    "min_delay_seconds": 2.0,
+    "max_delay_seconds": 8.0,
+    "long_delay_seconds": 30.0,
+    "retry_attempts": 3,
+    "backoff_multiplier": 2.0,
+    "user_agents": [
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0"
+    ]
+  },
+  "captcha_detection": {
+    "indicators": [
+      "captcha",
+      "recaptcha",
+      "Please show you're not a robot",
+      "unusual traffic",
+      "verify you are human",
+      "solving this puzzle",
+      "robot",
+      "captcha-container",
+      "g-recaptcha",
+      "blocked",
+      "suspicious activity"
+    ],
+    "dom_selectors": [
+      "[class*='captcha']",
+      "[id*='captcha']",
+      "[class*='recaptcha']",
+      "[id*='recaptcha']",
+      ".g-recaptcha"
+    ]
+  },
+  "bypass_strategies": {
+    "session_rotation": {
+      "enabled": true,
+      "max_requests_per_session": 10,
+      "cooldown_minutes": 5
+    },
+    "proxy_rotation": {
+      "enabled": false,
+      "proxies": [],
+      "timeout_seconds": 10
+    },
+    "browser_fingerprinting": {
+      "enabled": true,
+      "randomize_viewport": true,
+      "randomize_user_agent": true,
+      "disable_webdriver_detection": true
+    }
+  },
+  "performance_metrics": {
+    "success_rate_threshold": 0.85,
+    "avg_response_time_threshold": 5.0,
+    "captcha_encounter_rate_threshold": 0.1,
+    "false_positive_rate_threshold": 0.05
+  }
+}

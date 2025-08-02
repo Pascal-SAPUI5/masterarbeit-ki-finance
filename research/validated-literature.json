@@ -1,20 +1,19 @@
 [
   {
-    "title": "Logic-based technologies for multi-agent systems: a systematic literature review",
+    "title": "Introduction to Design Science Research",
     "authors": [
-      "Calegari, Roberta",
-      "Ciatto, Giovanni",
-      "Mascardi, Viviana",
-      "Omicini, Andrea"
+      "vom Brocke, Jan",
+      "Hevner, Alan",
+      "Maedche, Alexander"
     ],
-    "year": "2021",
-    "journal": "Autonomous Agents and Multi-Agent Systems",
-    "doi": "10.1007/s10458-020-09478-3",
-    "abstract": "<jats:title>Abstract</jats:title><jats:p>Precisely when the success of artificial intelligence (AI) sub-symbolic techniques makes them be identified with the whole AI by many non-computer-scientists and non-technical media, symbolic approaches are getting more and more attention as those that could make AI amenable to human understanding. Given the recurring cycles in the AI history, we expect that a revamp of technologies often tagged as “classical AI”—in particular,<jats:italic>logic-based</jats:italic>ones—will take place in the next few years. On the other hand, agents and<jats:italic>multi-agent systems</jats:italic>(MAS) have been at the core of the design of intelligent systems since their very beginning, and their long-term connection with<jats:italic>logic-based technologies</jats:italic>, which characterised their early days, might open new ways to engineer<jats:italic>explainable intelligent systems</jats:italic>. This is why understanding the current status of<jats:italic>logic-based technologies for MAS</jats:italic>is nowadays of paramount importance. Accordingly, this paper aims at providing a comprehensive view of those technologies by making them the subject of a<jats:italic>systematic literature review</jats:italic>(SLR). The resulting technologies are discussed and evaluated from two different perspectives: the MAS and the logic-based ones.</jats:p>",
-    "citations": 65,
-    "type": "journal-article",
+    "year": "2020",
+    "journal": "Progress in IS",
+    "doi": "10.1007/978-3-030-46781-4_1",
+    "abstract": "",
+    "citations": 124,
+    "type": "book-chapter",
     "subjects": [],
     "database": "Crossref",
-    "quartile": "Q2"
+    "quartile": "Q1"
   }
 ]

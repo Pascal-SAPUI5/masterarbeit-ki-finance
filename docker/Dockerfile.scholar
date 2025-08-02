@@ -1,0 +1,65 @@
+FROM python:3.10-slim
+
+# Install system dependencies for CAPTCHA bypass and browser automation
+RUN apt-get update && apt-get install -y \
+    chromium \
+    chromium-driver \
+    xvfb \
+    wget \
+    curl \
+    ca-certificates \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libdrm2 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libxss1 \
+    libxtst6 \
+    xdg-utils \
+    libatspi2.0-0 \
+    libgtk-4-1 \
+    libdrm-common \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install Python dependencies for CAPTCHA bypass
+COPY requirements.txt constraints.txt ./
+
+# Install enhanced requirements for CAPTCHA bypass
+RUN pip install --no-cache-dir \
+    selenium==4.16.0 \
+    undetected-chromedriver==3.5.4 \
+    requests-html==0.10.0 \
+    playwright==1.40.0 \
+    fake-useragent==1.4.0 \
+    rotating-proxies==0.6.2 \
+    captcha-solver==0.1.5 \
+    selenium-stealth==1.0.6 \
+    && pip install --no-cache-dir -c constraints.txt -r requirements.txt
+
+# Install Playwright browsers
+RUN playwright install chromium
+
+# Copy application code
+COPY . .
+
+# Create directories
+RUN mkdir -p /app/.claude_memory /app/research/q1-sources /app/output /app/writing/chapters
+
+# Set environment variables for headless browser
+ENV DISPLAY=:99
+ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROME_PATH=/usr/bin/chromium
+
+# Create startup script
+RUN echo '#!/bin/bash\n\
+Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &\n\
+exec "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
+
+EXPOSE 3000
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["python", "scripts/enhanced_scholar_search.py", "--daemon"]
